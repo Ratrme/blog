@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客登录</title>
+    <link rel="stylesheet" href="../../static/lib/semantic-ui/semantic.min.css" th:href="@{/lib/semantic-ui/semantic.min.css}">
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/icon.min.css'>
+    <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}">
+    <style>
+        li::before{
+            content: "" !important;
+        }
+    </style>
+</head>
+<body>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="m-container-small m-padded-tb-massive" style="width: 30em !important;">
+    <div class="ui container">
+        <div class="ui middle aligned center aligned grid">
+            <div class="column">
+                <h2 class="ui blue header">
+                    <div class="content">
+                        博客后台登录
+                    </div>
+                </h2>
+                <form class="ui large form" method="post" th:action="@{/admin/login}">
+                    <div class="ui segment m-bg">
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="user icon"></i>
+                                <input type="text" name="username" placeholder="用户名" class="m-bg">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="lock icon"></i>
+                                <input type="password" name="password" placeholder="密码" class="m-bg">
+                            </div>
+                        </div>
+                        <button class="ui fluid large blue basic submit button">Login</button>
+                    </div>
+                    <div class="ui error message">
+                    </div>
+                    <div class="ui mini negative message" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../static/js/jquery.js" th:src="@{/js/jquery.js}"></script>
+<script src="../../static/lib/semantic-ui/semantic.min.js" th:src="@{/lib/semantic-ui/semantic.min.js}"></script>
+<script>
+    $('.ui.form').form({
+        fields: {
+            username: {
+                identifier: 'username',
+                rules: [{
+                    type: 'empty',
+                    prompt: '请输入用户名'
+                }]
+            },
+            password: {
+                identifier: 'password',
+                rules: [{
+                    type: 'empty',
+                    prompt: '请输入密码'
+                }]
+            }
+        }
+    })
+</script>
+</body>
+</html>

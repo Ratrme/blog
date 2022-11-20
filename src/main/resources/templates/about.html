@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我</title>
+    <link rel="stylesheet" href="../static/lib/semantic-ui/semantic.min.css">
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/icon.min.css'>
+    <link rel="stylesheet" href="../static/css/me.css">
+</head>
+<body>
+<!--导航-->
+<nav th:replace="_fragments :: menu(1)" class="ui attached segment m-padded-tb-mini m-shadow-small m-bg">
+    <div class="ui container">
+        <div class="ui secondary stackable menu">
+            <a href="index.html" class="item" title="首页">
+                <h1 class="ui header item">Ratrme</h1>
+            </a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="clone icon"></i>归档</a>
+            <a href="#" class="active m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mail icon"></i>留言板</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="linkify icon"></i>友链</a>
+            <div class="m-item right item m-mobile-hide">
+                <div class="ui icon transparent input">
+                    <input type="text" placeholder="Search">
+                    <i class="search link icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="ui menu toggle icon button m-top-right m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+
+<div class="m-container-small m-padded-tb-big">
+    <div class="ui container">
+        <div class="ui stackable grid">
+            <!--左边-->
+            <div class="eleven wide column">
+                <div class="ui blue segment m-text m-bg">
+                    <p>
+                        一个02年学生！刚入门的小白，希望一边学习一边积累经验，分享一些个人经验，以及结交一些的朋友。
+                    </p>
+                    <br>
+                    <p>
+                        这个博客是一个技术型的博客，我把自己掌握的知识到运用到这里，也将自己遇到的问题，都记录下来，方便自己查阅。
+                        这个网站是从0开始搭建的，并且我这个个人博客我会一直坚持下去的，也会一直往技术方面走。
+                    </p>
+                    <h2>About my blog</h2>
+                    <br>
+                    <p>域 名：创建于2022年11月25日</p>
+                    <br>
+                    <p>服务器：阿里云服务器</p>
+                    <br>
+                    <p>备案号：桂ICP备20002883号-1</p>
+                    <br>
+                    <p>技术： Java Springboot Mybatis</p>
+                </div>
+            </div>
+            <!--右边-->
+            <div class="five wide column">
+                <div class="ui top attached blue segment m-bg">
+                    <div class="ui header">关于我</div>
+                </div>
+                <div class="ui card attached segment m-bg">
+                    <div class="ui segment m-bg">
+                        <img src="../static/images/touxiang.jpg" alt="" class="ui image">
+                    </div>
+                    <a href="#" class="ui center aligned m-padded-tb-small"
+                       style="color: black;font-size: 18px;font-weight: 800;">
+                        Ratrme
+                    </a>
+                </div>
+                <div class="ui attached segment m-bg">
+                    <p class="m-text">只要学不死，就往死里学。内卷太严重了，不学没饭吃啊！</p>
+                </div>
+                <div class="ui bottom attached center aligned segment m-bg">
+                    <a href="#" class="ui steam circular icon button" data-content="1070626113"
+                       data-position="bottom center"><i class="black steam icon"></i></a>
+                    <a href="https://github.com/Ratrme" target="_blank" class="ui github circular icon button"
+                       data-content="Ratrme"
+                       data-position="bottom center"><i class="black github icon"></i></a>
+                    <a href="#" class="ui inverted wechat circular icon button"><i class="green weixin icon"></i></a>
+                    <a href="#" class="ui inverted qq circular icon button" data-content="1628337281"
+                       data-position="bottom center"><i class="blue qq icon"></i></a>
+                    <div class="ui wechat-qr flowing popup transition hidden">
+                        <img src="../static/images/weixin.jpg" alt="" class="ui rounded image" style="width: 110px">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<!--底部-->
+<footer th:replace="_fragments :: footer" class="ui vertical segment m-padded-tb-massive">
+    <div class="ui center aligned container">
+        <div class="ui inverted stackable grid">
+            <div class="three wide column">
+                <div class="ui vertical link list">
+                    <div class="item">
+                        <img src="../static/images/weixin.jpg" class="ui rounded image" alt="" style="width: 110px">
+                    </div>
+                </div>
+            </div>
+            <div class="four wide column">
+                <h4 class="ui header m-text-thin m-text-spaced">最新的博客</h4>
+                <div class="ui link list">
+                    <a href="#" target="_blank" class="item">SpringBoot</a>
+                    <a href="#" target="_blank" class="item">SpringBoot</a>
+                    <a href="#" target="_blank" class="item">SpringBoot</a>
+                </div>
+            </div>
+            <div class="four wide column">
+                <h4 class="ui header m-text-thin m-text-spaced">联系我</h4>
+                <div class="ui link list">
+                    <span class="m-text-thin m-text-spaced m-opacity-mini">Email:ratrmelxy@gmail.com</span>
+                    <span class="m-text-thin m-text-spaced m-opacity-mini">QQ:1628337281</span>
+                </div>
+            </div>
+            <div class="five wide column">
+                <h4 class="ui header m-text-thin m-text-spaced">博客</h4>
+                <div class="ui link list">
+                    <p class="m-text-thin m-text-spaced m-opacity-mini">
+                        本博客是自己通过代码构建的。前端都使用了一些HTML+CSS+JS等前端框架，后端使用了JAVA和SpringBoot框架。对这些技术有兴趣的朋友可以联系我，我们一起学习进步。</p>
+                </div>
+            </div>
+        </div>
+        <div class="ui section divider"></div>
+        <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2020 - 2022 CPP Designed by Lu xiaoyang</p>
+    </div>
+</footer>
+<script src="../static/js/jquery.js" th:src="@{/js/jquery.js}"></script>
+<script src="../static/lib/semantic-ui/semantic.min.js" th:src="@{/lib/semantic-ui/semantic.min.js}"></script>
+<script>
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+    $('.qq').popup();
+    $('.wechat').popup({
+        popup: $('.wechat-qr.popup'),
+        on: 'hover',
+        position: 'bottom center'
+    });
+    $('.steam').popup();
+    $('.github').popup();
+</script>
+
+</body>
+</html>

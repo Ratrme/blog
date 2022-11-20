@@ -1,0 +1,23 @@
+server:
+  port: 80
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blog?serverTimezone=UTC
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+
+
+logging:
+  level:
+    root: info
+    com.lxy: debug
+  file:
+    name: log/blog-dev.log
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      file-name-pattern: blog-dev.%d{yyyy-MM-dd}--%i.log
+
