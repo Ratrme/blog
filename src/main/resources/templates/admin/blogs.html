@@ -1,13 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head th:replace="admin/_fragments :: head(~{::title})">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>博客管理</title>
-    <link rel="stylesheet" href="../../static/lib/semantic-ui/semantic.min.css" th:href="@{/lib/semantic-ui/semantic.min.css}">
-    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/icon.min.css'>
+    <link rel="stylesheet" href="../../static/lib/semantic-ui/semantic.min.css"
+          th:href="@{/lib/semantic-ui/semantic.min.css}">
+    <link rel='stylesheet prefetch'
+          href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/icon.min.css'>
     <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}">
-    <style>th {background-color: hsla(0, 0%, 100%, .001) !important;}</style>
+    <style>
+        th {
+            background-color: hsla(0, 0%, 100%, .001) !important;
+        }
+    </style>
 </head>
 <body>
 <!--导航-->
@@ -23,7 +29,8 @@
             <div class="right m-item m-mobile-hide menu">
                 <div class="ui dropdown item">
                     <div class="text">
-                        <img src="../../static/images/touxiang.jpg" th:src="@{/images/touxiang.jpg}" alt="" class="ui avatar image">
+                        <img src="../../static/images/touxiang.jpg" th:src="@{/images/touxiang.jpg}" alt=""
+                             class="ui avatar image">
                         Ratrme
                     </div>
                     <i class="ui dropdown icon"></i>
@@ -43,31 +50,38 @@
 <div class="ui inverted attached secondary  menu">
     <div class="ui container">
         <div class="right menu">
-            <a href="#" class="red basic item">发布</a>
-            <a href="#" class="active blue basic item">清单</a>
+            <a th:href="@{/admin/blogs/input}" class="item">发布</a>
+            <a th:href="@{/admin/blogs}" class="active blue basic item">清单</a>
         </div>
     </div>
 </div>
 
 <!--中间部分-->
-<div class="m-container-small m-padded-tb-big">
+<div class="m-padded-tb-big">
     <div class="ui container">
-        <form action="#" class="ui blue segment form m-bg">
+        <div class="ui blue secondary segment form m-bg">
+            <input type="hidden" name="pageNum">
             <div class="inline fields">
                 <div class="field">
-                    <input type="text" name="tittle" placeholder="标题" class="m-bg" style="width: 250px!important;">
+                    <input type="text" name="title" placeholder="标题" class="m-bg" style="width: 250px!important;">
                 </div>
                 <div class="field">
-                    <div class="ui selection dropdown m-bg">
-                        <input type="hidden" name="type">
-                        <i class="dropdown icon"></i>
-                        <div class="default text" style="width: 205px!important;">分类</div>
-                        <div class="menu">
-                            <div class="item" data-value="1">前端</div>
-                            <div class="item" data-value="2">后端</div>
+                    <div class="ui labeled action input">
+                        <div class="ui type search selection dropdown m-bg">
+                            <input type="hidden" name="type.id">
+                            <i class="dropdown icon"></i>
+                            <div class="default text">分类</div>
+                            <div class="menu">
+                                <div th:each="type : ${types}" class="item"
+                                     th:text="${type.name}"
+                                     th:data-value="${type.id}">前端
+                                </div>
+                            </div>
                         </div>
+                        <button id="clear-btn" class="ui basic compact button m-bg" >清除</button>
                     </div>
                 </div>
+
                 <div class="field">
                     <div class="ui checkbox">
                         <input type="checkbox" name="recommend" id="recommend">
@@ -76,65 +90,97 @@
                         </label>
                     </div>
                 </div>
-                <div class="field" style="margin-left: 130px!important;">
-                    <button class="ui small basic button"><i class="save icon"></i>新增</button>
-                </div>
-
                 <div class="field">
-                    <button class="ui small basic button"><i class="search icon"></i>查询</button>
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="published" id="published">
+                        <label for="published">
+                            发布
+                        </label>
+                    </div>
+                </div>
+                <div class="field" style="margin-left: 200px!important;">
+                    <a th:href="@{/admin/blogs/input}" class="ui blue basic button"><i class="save icon"></i>新增</a>
+                </div>
+                <div class="field">
+                    <button type="button" id="search-btn" class="ui blue basic button"><i class="search icon"></i>查询
+                    </button>
                 </div>
 
 
             </div>
-        </form>
-        <table class="ui center aligned table m-bg">
-            <thead>
-            <tr>
-                <th>序号</th>
-                <th>标题</th>
-                <th>类型</th>
-                <th>推荐</th>
-                <th>更新时间</th>
-                <th>操作</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>1</td>
-                <td>vue入门</td>
-                <td>学习</td>
-                <td>是</td>
-                <td>2022-11-19</td>
-                <td>
-                    <a href="#" class="ui blue basic mini button">编辑</a>
-                    <a href="#" class="ui red basic mini button">删除</a>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>vue入门</td>
-                <td>学习</td>
-                <td>是</td>
-                <td>2022-11-19</td>
-                <td>
-                    <a href="#" class="ui blue basic mini button">编辑</a>
-                    <a href="#" class="ui red basic mini button">删除</a>
-                </td>
-            </tr>
-            </tbody>
-            <tr>
-                <th colspan="6">
-                    <div class="ui inverted menu m-bg">
-                        <div class="left aligned item">
-                            <a href="#" class="ui mini grey basic button">上一页</a>
+        </div>
+        <div id="table-container">
+            <table th:fragment="blogList" class="ui center aligned compact table m-bg">
+                <thead>
+                <tr style="word-break: keep-all">
+                    <th>序号</th>
+                    <th>首图</th>
+                    <th style="width: 200px!important;">标题</th>
+                    <th>类型</th>
+                    <th>分类</th>
+                    <th>热度</th>
+                    <th>推荐</th>
+                    <th>发布</th>
+                    <th>创建时间</th>
+                    <th>更新时间</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="blog,iterStat : ${blogs.list}">
+                    <td th:text="${iterStat.count}">1</td>
+                    <td><img src="../../static/images/blog30.jpg" th:src="@{${blog.firstPicture}}"
+                             style="width: 150px!important;height:100px !important;"></td>
+                    <td th:text="${blog.title}" style="white-space: pre-wrap!important;">vue入门</td>
+                    <td th:text="${blog.flag}"></td>
+                    <td th:text="${blog.type.name}">学习</td>
+                    <td th:text="${blog.views}">100</td>
+                    <td th:text="${blog.recommend}? '是':'否'">是</td>
+                    <td th:text="${blog.published} ? '已发布':'未发布'">是</td>
+                    <td th:text="${#dates.format(blog.createTime,'yyyy-MM-dd')}">2022-11-19</td>
+                    <td th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2022-11-19</td>
+                    <td>
+                        <a th:href="@{/admin/blogs/edit/{id}(id=${blog.id})}" class="ui orange basic mini button">编辑</a>
+                        <a th:href="@{/admin/blogs/delete/{id}(id=${blog.id})}"
+                           class="ui red basic mini button">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr th:if="${blogs.total>1}">
+                    <th colspan="11">
+                        <div class="ui pagination menu m-bg">
+                            <a onclick="page(this)" th:attr="data-page=${blogs.pageNum}-1"
+                               th:unless="${blogs.isIsFirstPage()}" class="left floated item">上一页</a>
+                            <div class="item">
+                                第
+                                <h8><span th:text="${blogs.pageNum}"></span></h8>
+                                页/共
+                                <h8><span th:text="${blogs.pages}"></span></h8>
+                                页
+                                &nbsp;
+                                共
+                                <h8><span th:text="${blogs.total}"></span></h8>
+                                条
+                            </div>
+                            <a onclick="page(this)" th:attr="data-page=${blogs.pageNum}+1"
+                               th:unless="${blogs.isIsLastPage()}" class="item">下一页</a>
                         </div>
-                        <div class="right aligned item">
-                            <a href="#" class="ui mini grey basic button">下一页</a>
-                        </div>
-                    </div>
-                </th>
-            </tr>
-        </table>
+                    </th>
+                </tr>
+                </tfoot>
+            </table>
+            <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+                <i class="close icon"></i>
+                <div class="header">提示</div>
+                <p th:text="${message}"></p>
+            </div>
+            <div class="ui error message" th:unless="${#strings.isEmpty(error)}">
+                <i class="close icon"></i>
+                <div class="header">提示</div>
+                <p th:text="${error}"></p>
+            </div>
+        </div>
     </div>
 </div>
 <br>
@@ -150,7 +196,8 @@
             <div class="three wide column">
                 <div class="ui vertical link list">
                     <div class="item">
-                        <img src="../../static/images/weixin.jpg" th:src="@{/images/weixin.jpg}" class="ui rounded image" alt="" style="width: 110px">
+                        <img src="../../static/images/weixin.jpg" th:src="@{/images/weixin.jpg}"
+                             class="ui rounded image" alt="" style="width: 110px">
                     </div>
                 </div>
             </div>
@@ -189,6 +236,40 @@
         $('.m-item').toggleClass('m-mobile-hide');
     });
     $('.ui.dropdown').dropdown();
+
+    //消息提示关闭
+    // $('.message .close').on('click', function () {
+    //     $(this).closest('.message').transition('fade');
+    // });
+
+    setTimeout(function () {
+        $('.message .close').closest('.message').transition('fade')
+    }, 500);
+
+    $('#clear-btn').on('click',function() {
+        $('.ui.type.dropdown')
+            .dropdown('clear');
+    })
+
+    function page(obj) {
+        $("[name='pageNum']").val($(obj).data("page"));
+        loadData();
+    }
+
+    $("#search-btn").click(function () {
+        $("[name='pageNum']").val(0);
+        loadData();
+    })
+
+    function loadData() {
+        $('#table-container').load(/*[[@{/admin/blogs/search}]]*/"/admin/blogs/search", {
+            title: $("[name='title']").val(),
+            typeId: $("[name='type.id']").val(),
+            recommend: $("[name='recommend']").prop('checked'),
+            published: $("[name='published']").prop('checked'),
+            pageNum: $("[name='pageNum']").val()
+        });
+    }
 </script>
 
 </body>

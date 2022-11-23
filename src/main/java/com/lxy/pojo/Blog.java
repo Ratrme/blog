@@ -1,7 +1,6 @@
 package com.lxy.pojo;
 
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -44,7 +43,9 @@ public class Blog {
     //修改时间
     private Date updateTime;
 
+
     private Type type;
+
 
     private List<Tag> tags;
 

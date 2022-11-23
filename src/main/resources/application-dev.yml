@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/blog?serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/blog
     username: root
     password: root
     type: com.alibaba.druid.pool.DruidDataSource
@@ -19,5 +19,5 @@ logging:
   logback:
     rollingpolicy:
       max-file-size: 10MB
-      file-name-pattern: blog-dev.%d{yyyy-MM-dd}--%i.log
+      file-name-pattern: log/blog-dev.%d{yyyy-MM-dd}--%i.log
 

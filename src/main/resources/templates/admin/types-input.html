@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin/_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分类新增</title>
+    <link rel="stylesheet" href="../../static/lib/semantic-ui/semantic.min.css"
+          th:href="@{/lib/semantic-ui/semantic.min.css}">
+    <link rel='stylesheet prefetch'
+          href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/icon.min.css'>
+    <link rel="stylesheet" href="../../static/lib/editormd/css/editormd.min.css"
+          th:href="@{/lib/editormd/css/editormd.min.css}">
+    <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}">
+</head>
+<body>
+<!--导航-->
+<nav th:replace="admin/_fragments :: menu(2)" class="ui attached segment m-padded-tb-mini m-shadow-small m-bg">
+    <div class="ui container">
+        <div class="ui secondary stackable menu">
+            <a href="#" class="item" title="首页">
+                <h1 class="ui header item">Ratrme</h1>
+            </a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="home icon"></i>博客</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
+            <div class="right m-item m-mobile-hide menu">
+                <div class="ui dropdown item">
+                    <div class="text">
+                        <img src="../../static/images/touxiang.jpg" th:src="@{/images/touxiang.jpg}" alt=""
+                             class="ui avatar image">
+                        Ratrme
+                    </div>
+                    <i class="ui dropdown icon"></i>
+                    <div class="menu">
+                        <a href="#" class="item">注销</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="ui menu toggle icon button m-top-right m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+<div class="ui inverted attached secondary menu">
+    <div class="ui container">
+        <div class="right menu">
+            <a th:href="@{/admin/types/input}" class="active blue basic item">新增</a>
+            <a th:href="@{/admin/types}" class="item">清单</a>
+        </div>
+    </div>
+</div>
+
+<!--中间部分-->
+<div class="m-container-small m-padded-tb-big">
+    <div class="ui container">
+        <form method="post" th:object="${type}" th:action="*{id}==null ? @{/admin/types} : @{/admin/types/update/{id}(id=*{id})}" class="ui form">
+            <input type="hidden" name="id" th:value="*{id}">
+            <div class="required field">
+                <div class="ui left labeled input">
+                    <label class="ui basic label m-bg m-text">名称</label>
+                    <input type="text" name="name" placeholder="分类名称" th:value="*{name}" class="m-bg">
+                </div>
+            </div>
+
+            <div class="ui error message"></div>
+            <!--/*/
+            <div class="ui negative message" th:if="${#fields.hasErrors('name')}">
+                <i class="close icon"></i>
+                <div class="header">验证失败</div>
+                <p th:errors="*{name}">提交信息不符合规则</p>
+            </div>
+            /*/-->
+            <div class="ui right aligned container">
+                <button type="button" class="ui button" onclick="window.history.go(-1)">返回</button>
+                <button class="ui blue submit button">提交</button>
+            </div>
+        </form>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<!--底部-->
+<footer th:replace="admin/_fragments :: footer" class="ui vertical segment m-padded-tb-massive">
+    <div class="ui center aligned container">
+        <div class="ui inverted stackable grid">
+            <div class="three wide column">
+                <div class="ui vertical link list">
+                    <div class="item">
+                        <img src="../../static/images/weixin.jpg" th:src="@{/images/weixin.jpg}"
+                             class="ui rounded image" alt="" style="width: 110px">
+                    </div>
+                </div>
+            </div>
+            <div class="four wide column">
+                <h4 class="ui header m-text-thin m-text-spaced">最新的博客</h4>
+                <div class="ui link list">
+                    <a href="#" target="_blank" class="item">SpringBoot</a>
+                    <a href="#" target="_blank" class="item">SpringBoot</a>
+                    <a href="#" target="_blank" class="item">SpringBoot</a>
+                </div>
+            </div>
+            <div class="four wide column">
+                <h4 class="ui header m-text-thin m-text-spaced">联系我</h4>
+                <div class="ui link list">
+                    <span class="m-text-thin m-text-spaced m-opacity-mini">Email:ratrmelxy@gmail.com</span>
+                    <span class="m-text-thin m-text-spaced m-opacity-mini">QQ:1628337281</span>
+                </div>
+            </div>
+            <div class="five wide column">
+                <h4 class="ui header m-text-thin m-text-spaced">博客</h4>
+                <div class="ui link list">
+                    <p class="m-text-thin m-text-spaced m-opacity-mini">
+                        本博客是自己通过代码构建的。前端都使用了一些HTML+CSS+JS等前端框架，后端使用了JAVA和SpringBoot框架。对这些技术有兴趣的朋友可以联系我，我们一起学习进步。</p>
+                </div>
+            </div>
+        </div>
+        <div class="ui section divider"></div>
+        <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2020 - 2022 CPP Designed by Lu xiaoyang</p>
+    </div>
+</footer>
+
+<script src="../../static/js/jquery.js" th:src="@{/js/jquery.js}"></script>
+<script src="../../static/lib/semantic-ui/semantic.min.js" th:src="@{/lib/semantic-ui/semantic.min.js}"></script>
+<script src="../../static/lib/editormd/editormd.min.js" th:src="@{/lib/editormd/editormd.min.js}"></script>
+<script>
+
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('.ui.dropdown').dropdown();
+
+    //前端输入不为空校验
+    $('.ui.form').form({
+        fields: {
+            title: {
+                identifier: 'name',
+                rules: [{
+                    type: 'empty',
+                    prompt: '请输入分类名称！'
+                }]
+            }
+        }
+    });
+
+    //消息提示快速自动关闭
+    setTimeout(function() {
+        $('.message .close').closest('.message').transition('fade')
+    },500);
+
+    // //消息提示关闭
+    // $('.message .close').on('click', function () {
+    //     $(this).closest('.message').transition('fade');
+    // });
+
+
+</script>
+
+</body>
+</html>

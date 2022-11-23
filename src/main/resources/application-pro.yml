@@ -18,5 +18,5 @@ logging:
   logback:
     rollingpolicy:
       max-file-size: 10MB
-      file-name-pattern: blog-pro.%d{yyyy-MM-dd}--%i.log
+      file-name-pattern: log/blog-pro.%d{yyyy-MM-dd}--%i.log
 

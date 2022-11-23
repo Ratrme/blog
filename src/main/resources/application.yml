@@ -1,6 +1,7 @@
 spring:
   thymeleaf:
     mode: HTML
+    cache: false
   profiles:
     active: dev
 
@@ -10,3 +11,9 @@ mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
