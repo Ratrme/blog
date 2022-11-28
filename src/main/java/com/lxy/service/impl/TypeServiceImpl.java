@@ -37,6 +37,12 @@ public class TypeServiceImpl implements TypeService {
         return typeMapper.getAllType();
     }
 
+    @Override
+    public List<Type> getFrontTypes(Integer size) {
+        return typeMapper.getFrontTypes(size);
+    }
+
+
     @Transactional
     @Override
     public int updateType(Type type) {

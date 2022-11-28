@@ -150,7 +150,7 @@
                 <tr th:if="${blogs.total>1}">
                     <th colspan="11">
                         <div class="ui pagination menu m-bg">
-                            <a onclick="page(this)" th:attr="data-page=${blogs.pageNum}-1"
+                            <a onclick="page(this)" th:attr="data-page=${blogs.hasPreviousPage}?${blogs.prePage}:1"
                                th:unless="${blogs.isIsFirstPage()}" class="left floated item">上一页</a>
                             <div class="item">
                                 第
@@ -163,7 +163,7 @@
                                 <h8><span th:text="${blogs.total}"></span></h8>
                                 条
                             </div>
-                            <a onclick="page(this)" th:attr="data-page=${blogs.pageNum}+1"
+                            <a onclick="page(this)" th:attr="data-page=${blogs.hasNextPage}?${blogs.nextPage}:${blogs.pages}"
                                th:unless="${blogs.isIsLastPage()}" class="item">下一页</a>
                         </div>
                     </th>

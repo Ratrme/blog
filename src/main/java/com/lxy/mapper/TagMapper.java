@@ -21,6 +21,8 @@ public interface TagMapper {
 
     List<Tag> getAllTags(@Param("ids") List<Long> ids);
 
+    List<Tag> getFrontTags(Integer size);
+
     int updateTag(Tag tag);
 
     int deleteTag(Long id);

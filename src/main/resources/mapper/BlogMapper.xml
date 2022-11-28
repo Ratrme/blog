@@ -1,44 +1,74 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.lxy.mapper.BlogMapper">
-
     <!--3、查询：（博客ID） 查询博客信息-->
     <select id="getBlogById" resultMap="BlogMap">
-        select id,title,content,first_picture,description,flag,views,appreciation,share_statement,commentable,recommend,published,create_time,update_time,type_id
+        select id,
+               title,
+               content,
+               first_picture,
+               description,
+               flag,
+               views,
+               appreciation,
+               share_statement,
+               commentable,
+               recommend,
+               published,
+               create_time,
+               update_time,
+               type_id
         from t_blog
         where t_blog.id = #{id}
     </select>
 
     <!--4、查询所有的博客-->
-    <select id="getAllBlog" resultType="com.lxy.pojo.Blog">
-        select id,title,content,first_picture,description,flag,views,appreciation,share_statement,commentable,recommend,published,create_time,update_time,type_id
+    <select id="getAllBlog" resultMap="BlogMap">
+        select *
         from blog.t_blog
     </select>
 
     <select id="getType" resultType="Type">
-        select * from t_type where id=#{id};
+        select *
+        from t_type
+        where id = #{id};
     </select>
     <select id="getUser" resultType="User">
-        select * from t_user where id=#{id};
+        select *
+        from t_user
+        where id = #{id};
     </select>
 
     <select id="getBlogsBySearchInfo" resultMap="BlogMap">
-        select id,title,content,first_picture,description,flag,views,appreciation,share_statement,commentable,recommend,published,create_time,update_time,type_id
+        select id,
+               title,
+               content,
+               first_picture,
+               description,
+               flag,
+               views,
+               appreciation,
+               share_statement,
+               commentable,
+               recommend,
+               published,
+               create_time,
+               update_time,
+               type_id
         from t_blog
         <where>
-           <if test="title != null and title != ''">
-               and title like concat('%',#{title},'%')
-           </if>
-            <if test="typeId != null and typeId!= ''">
-                and type_id=#{typeId}
+            <if test="title != null and title != ''">
+                and title like concat('%', #{title}, '%')
             </if>
-            <if test="recommend == true ">
-                and recommend=#{recommend}
+            <if test="typeId != null and typeId != ''">
+                and type_id = #{typeId}
             </if>
-            <if test="published == true ">
-                and published=#{published}
+            <if test="recommend == true">
+                and recommend = #{recommend}
             </if>
-
+            <if test="published == true">
+                and published = #{published}
+            </if>
         </where>
     </select>
     <resultMap id="BlogMap" type="Blog">
@@ -56,35 +86,70 @@
         <result property="recommend" column="recommend"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
-
-
         <association property="type" column="type_id" javaType="Type" select="getType">
         </association>
-
+        <association property="user" column="user_id" javaType="User" select="getUser">
+        </association>
     </resultMap>
     <!--9、更新：通过（博客id）， 更新博客（访问次数+1）-->
     <update id="addViews" parameterType="Long">
-        update t_blog set views = views + 1
+        update t_blog
+        set views = views + 1
         where id = #{id}
     </update>
 
     <insert id="saveBlog" useGeneratedKeys="true" keyProperty="id">
-        insert into t_blog(title,content,first_picture,description,
-        flag,views,appreciation,share_statement,commentable,published,
-        recommend,type_id,user_id) values (
-        #{title},#{content},#{firstPicture},#{description},#{flag},#{views},#{appreciation},#{shareStatement},
-        #{commentable},#{published},#{recommend},#{type.id},#{user.id}
-        );
+        insert into t_blog(title, content, first_picture, description,
+                           flag, views, appreciation, share_statement, commentable, published,
+                           recommend, type_id, user_id)
+        values (#{title}, #{content}, #{firstPicture}, #{description}, #{flag}, #{views}, #{appreciation},
+                #{shareStatement},
+                #{commentable}, #{published}, #{recommend}, #{type.id}, #{user.id});
     </insert>
 
     <update id="updateBlog" parameterType="Blog" useGeneratedKeys="true" keyProperty="id">
-        update t_blog set title = #{title},content = #{content},first_picture=#{firstPicture},description=#{description},
-        flag = #{flag},appreciation=#{appreciation},share_statement=#{shareStatement},
-        commentable=#{commentable},published=#{published},recommend=#{recommend},update_time=#{updateTime},
-        type_id=#{type.id},user_id=#{user.id} where id = #{id};
+        update t_blog
+        set title          = #{title},
+            content        = #{content},
+            first_picture=#{firstPicture},
+            description=#{description},
+            flag           = #{flag},
+            appreciation=#{appreciation},
+            share_statement=#{shareStatement},
+            commentable=#{commentable},
+            published=#{published},
+            recommend=#{recommend},
+            update_time=#{updateTime},
+            type_id=#{type.id},
+            user_id=#{user.id}
+        where id = #{id};
     </update>
 
     <delete id="deleteBlog" parameterType="long">
-        delete from t_blog where id=#{id}
+        delete
+        from t_blog
+        where id = #{id}
     </delete>
+
+    <select id="getByViews" resultType="com.lxy.pojo.Blog">
+        select *
+        from t_blog
+        order by views desc
+        limit 0,#{size}
+    </select>
+
+    <select id="getByTime" resultType="com.lxy.pojo.Blog">
+        select *
+        from t_blog
+        order by update_time desc
+        limit 0,#{size}
+    </select>
+
+    <select id="getByTimeRecommend" resultType="com.lxy.pojo.Blog">
+        select *
+        from t_blog
+        where recommend = true
+        order by update_time desc
+        limit 0,#{size}
+    </select>
 </mapper>

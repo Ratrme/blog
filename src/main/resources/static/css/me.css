@@ -158,6 +158,18 @@ body::before {
     color: #333 !important;
 }
 
+
+/*-----transform-----*/
+.m-image:hover {
+    transform: scale(1.1);
+
+}
+
+.m-image {
+    -webkit-transition: all .5s ease;
+}
+
+
 /*----mobile------*/
 .m-mobile-show {
     display: none !important;

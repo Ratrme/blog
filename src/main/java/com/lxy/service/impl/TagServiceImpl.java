@@ -3,7 +3,7 @@ package com.lxy.service.impl;
 import com.lxy.mapper.TagMapper;
 import com.lxy.pojo.Tag;
 import com.lxy.service.TagService;
-import com.lxy.utils.StingToLong;
+import com.lxy.utils.StingToList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,12 +40,17 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public List<Tag> getAllTags(String ids) {
-        return tagMapper.getAllTags(StingToLong.convertToLong(ids));
+        return tagMapper.getAllTags(StingToList.convertToLong(ids));
     }
 
     @Override
     public List<Tag> getAllTags(List<Long> ids) {
         return tagMapper.getAllTags(ids);
+    }
+
+    @Override
+    public List<Tag> getFrontTags(Integer size) {
+        return tagMapper.getFrontTags(size);
     }
 
 

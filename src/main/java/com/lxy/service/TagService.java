@@ -19,6 +19,8 @@ public interface TagService {
 
     List<Tag> getAllTags(List<Long> ids);
 
+    List<Tag> getFrontTags(Integer size);
+
     //修改
     int updateTag(Tag type);
 

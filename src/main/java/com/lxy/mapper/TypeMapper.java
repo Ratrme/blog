@@ -19,6 +19,7 @@ public interface TypeMapper {
 
     List<Type> getAllType();
 
+    List<Type> getFrontTypes(Integer size);
     int updateType(Type type);
 
     int deleteType(Long id);

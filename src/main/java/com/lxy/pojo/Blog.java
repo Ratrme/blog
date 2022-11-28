@@ -43,6 +43,7 @@ public class Blog {
     //修改时间
     private Date updateTime;
 
+    private Long typeId;
 
     private Type type;
 
@@ -52,6 +53,7 @@ public class Blog {
     private String tagIds;
 
     private User user;
+    private Long userId;
 
     private List<Comment> comments;
 

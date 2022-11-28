@@ -17,3 +17,11 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
+
+
+
+frontTypeSize: 6
+frontTagSize: 10
+frontHotSize: 6
+frontNewRecommend: 6
+frontNewSize: 3

@@ -34,4 +34,20 @@
         from t_type
         where name = #{name}
     </select>
+
+    <resultMap id="types" type="Type">
+        <id property="id" column="tid"/>
+        <result property="name" column="name"/>
+        <collection property="blogs" ofType="Blog">
+            <id property="id" column="bid"/>
+            <result property="typeId" column="type_id"/>
+        </collection>
+    </resultMap>
+
+    <select id="getFrontTypes" resultMap="types">
+        select t.id tid, t.name,b.id bid,b.type_id
+        from t_blog b, t_type t
+        where b.type_id = t.id
+        order by b.type_id DESC limit 0,#{size}
+    </select>
 </mapper>

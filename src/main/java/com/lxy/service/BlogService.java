@@ -15,6 +15,14 @@ public interface BlogService {
     int addViews(Long id);
 
 
+    List<Blog> getAllBlog();
+
+    List<Blog> getViews(Integer size);
+
+    List<Blog> getByTime(Integer size);
+
+    List<Blog> getByTimeRecommend(Integer size);
+
     //8、查询：通过Search对象（title、typeName, recommend）, 查询博客信息
     List<Blog> getBlogsBySearchInfo(BlogQuery searchInfo);
 

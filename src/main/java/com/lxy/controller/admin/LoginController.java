@@ -30,6 +30,7 @@ public class LoginController {
         if (user != null) {
             user.setPassword(null);
             session.setAttribute("user", user);
+            session.setAttribute("success", "登陆成功");
             return "/admin/index";
         } else {
             attributes.addFlashAttribute("message","用户名或密码错误");

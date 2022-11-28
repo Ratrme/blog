@@ -1,35 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
-<head th:fragment="head(title)">
+<head th:replace="_fragments :: head(~{::title})">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:replace="${title}">博客详情</title>
-    <link rel="stylesheet" href="../static/lib/semantic-ui/semantic.min.css" th:href="@{/lib/semantic-ui/semantic.min.css}">
+    <title>500</title>
+    <link rel="stylesheet" href="../static/lib/semantic-ui/semantic.min.css">
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/icon.min.css'>
-    <link rel="stylesheet" href="../static/lib/animate/animate.css" th:href="@{/lib/animate/animate.css}"/>
-    <link rel="stylesheet" href="../static/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}">
-    <link rel="stylesheet" href="../static/css/typo.css" th:href="@{/css/typo.css}">
-    <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}">
-    <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
-    <style>th {
-        background-color: hsla(0, 0%, 100%, .001) !important;
-    }</style>
+    <link rel="stylesheet" href="../static/css/me.css">
 </head>
 <body>
 <!--导航-->
-<nav th:fragment="menu(n)" class="ui attached segment m-padded-tb-mini m-shadow-small m-bg">
+<nav th:replace="_fragments :: menu(1)" class="ui attached segment m-padded-tb-mini m-shadow-small m-bg">
     <div class="ui container">
         <div class="ui secondary stackable menu">
-            <a href="index.html" class="item" title="首页">
+            <a href="../templates/index.html" class="item" title="首页">
                 <h1 class="ui header item">Ratrme</h1>
             </a>
-            <a href="#" th:href="@{index.html}" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="home icon"></i>首页</a>
-            <a href="#" th:href="@{types.html}" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i class="idea icon"></i>分类</a>
-            <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="tags icon"></i>标签</a>
-            <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==4} ? 'active'"><i class="clone icon"></i>归档</a>
-            <a href="" class="m-item item m-mobile-hide" th:classappend="${n==5} ? 'active'"><i class="info icon"></i>关于我</a>
-            <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==6} ? 'active'"><i class="mail icon"></i>留言板</a>
-            <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==7} ? 'active'"><i class="linkify icon"></i>友链</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="clone icon"></i>归档</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mail icon"></i>留言板</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="linkify icon"></i>友链</a>
             <div class="m-item right item m-mobile-hide">
                 <div class="ui icon transparent input">
                     <input type="text" placeholder="Search">
@@ -42,8 +35,17 @@
         <i class="sidebar icon"></i>
     </a>
 </nav>
-<!--底部-->
-<footer th:fragment="footer" class="ui vertical segment m-padded-tb-massive">
+
+<div class="m-container-small m-padded-tb-massive" style="border: none!important;">
+    <div class="ui m-padded-tb-massive m-bg" style="border: none!important;">
+        <div class="ui container" style="color: rgba(182,64,64,0.82)">
+            <h2>500</h2>
+            <h3>对不起，服务器繁忙！</h3>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="_fragments :: footer" class="ui vertical segment m-padded-tb-massive">
     <div class="ui center aligned container">
         <div class="ui inverted stackable grid">
             <div class="three wide column">
@@ -56,7 +58,9 @@
             <div class="four wide column">
                 <h4 class="ui header m-text-thin m-text-spaced">最新的博客</h4>
                 <div class="ui link list">
-                    <a href="#" target="_blank" class="item" th:each="newBlog : ${newBlogs}"><span th:text="${newBlog.title}"></span></a>
+                    <a href="#" target="_blank" class="item">SpringBoot</a>
+                    <a href="#" target="_blank" class="item">SpringBoot</a>
+                    <a href="#" target="_blank" class="item">SpringBoot</a>
                 </div>
             </div>
             <div class="four wide column">
@@ -78,6 +82,5 @@
         <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2020 - 2022 CPP Designed by Lu xiaoyang</p>
     </div>
 </footer>
-
 </body>
 </html>

@@ -75,7 +75,7 @@ public class TagController {
             result.rejectValue("name", "nameError","已有该标签，请勿重复添加！");
         }
         if (result.hasErrors()) {
-            return "/admin/types-input";
+            return "/admin/tags-input";
         }
         int i = tagService.updateTag(tag);
         if (i == 1) {

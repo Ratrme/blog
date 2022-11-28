@@ -1,4 +1,4 @@
-package com.lxy.pojo;
+package com.lxy.vo;
 
 import lombok.Data;
 

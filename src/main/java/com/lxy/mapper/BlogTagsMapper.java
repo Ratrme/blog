@@ -1,6 +1,5 @@
 package com.lxy.mapper;
 
-import com.lxy.pojo.BlogTags;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

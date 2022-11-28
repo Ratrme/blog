@@ -42,6 +42,26 @@ public class BlogServiceImpl implements BlogService {
         return 0;
     }
 
+    @Override
+    public List<Blog> getAllBlog() {
+        return blogMapper.getAllBlog();
+    }
+
+    @Override
+    public List<Blog> getViews(Integer size) {
+        return blogMapper.getByViews(size);
+    }
+
+    @Override
+    public List<Blog> getByTime(Integer size) {
+        return blogMapper.getByTime(size);
+    }
+
+    @Override
+    public List<Blog> getByTimeRecommend(Integer size) {
+        return blogMapper.getByTimeRecommend(size);
+    }
+
 
     @Override
     public List<Blog> getBlogsBySearchInfo(BlogQuery searchInfo) {

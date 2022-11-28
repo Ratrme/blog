@@ -11,10 +11,14 @@ public interface TypeService {
 
     //根据id查询
     Type getType(Long id);
+
     //根据名称查询
     Type getTypeByName(String name);
+
     //查询全部
     List<Type> getAllType();
+
+    List<Type> getFrontTypes(Integer size);
 
     //修改
     int updateType(Type type);
