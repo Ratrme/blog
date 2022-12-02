@@ -18,7 +18,7 @@ public interface TypeService {
     //查询全部
     List<Type> getAllType();
 
-    List<Type> getFrontTypes(Integer size);
+    List<Type> getFrontTypes();
 
     //修改
     int updateType(Type type);

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface UserMapper {
-    @Select("select * from t_user where username=#{username} AND password=#{password}")
+    @Select("select id, nickname, username, email, avatar, type, create_time, update_time from t_user where username=#{username} AND password=#{password}")
     User findByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
 
 

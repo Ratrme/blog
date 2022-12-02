@@ -19,7 +19,7 @@ public interface TagService {
 
     List<Tag> getAllTags(List<Long> ids);
 
-    List<Tag> getFrontTags(Integer size);
+    List<Tag> getFrontTags();
 
     //修改
     int updateTag(Tag type);

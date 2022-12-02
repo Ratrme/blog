@@ -2,13 +2,12 @@
 
 .typo p {
   font-size: 16px;
-  font-weight: 300;
+  color: #000;
   line-height: 1.8;
   text-align: justify;
 }
 
 .typo li {
-  font-weight: 300;
   padding: 4px 0;
 }
 
@@ -117,7 +116,7 @@
 
 /* 让链接在 hover 状态下显示下划线 */
 .typo a {
-  color: #1179af;
+  color: #0D86C4FF;
 }
 
 .typo a:hover {
@@ -125,7 +124,7 @@
 }
 
 .typo a {
-  border-bottom: 1px solid #1179af;
+  border-bottom: 1px solid #0D86C4FF;
 }
 
 .typo a:hover {
@@ -232,7 +231,7 @@
 
 .typo h1,.typo  h2,.typo  h3,.typo  h4,.typo  h5,.typo  h6 {
   font-family: PingFang SC, Verdana, Helvetica Neue, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
-  font-weight: 100;
+  font-weight: 600;
   color: #000;
   line-height: 1.35;
 }
@@ -343,9 +342,9 @@
   #fork{ display:none; }
 }
 
-code{ color: #1179af; }
+code{ color: #c01ab2; }
 pre{white-space:pre-wrap;}
-i.serif{ text-transform:lowercase; color:#1179af; }
+i.serif{ text-transform:lowercase; color:#0D86C4FF; }
 :-moz-any(h1, h2, h3, h4, h5, h5) i.serif{ text-transform: capitalize; }
 i.serif:hover{ color:inherit; }
 

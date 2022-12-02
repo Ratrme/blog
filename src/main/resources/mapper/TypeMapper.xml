@@ -48,6 +48,6 @@
         select t.id tid, t.name,b.id bid,b.type_id
         from t_blog b, t_type t
         where b.type_id = t.id
-        order by b.type_id DESC limit 0,#{size}
+        order by b.type_id DESC
     </select>
 </mapper>

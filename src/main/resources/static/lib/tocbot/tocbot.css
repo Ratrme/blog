@@ -53,7 +53,6 @@ a.toc-link {
 }
 
 .toc-link::before {
-    background-color: #EEE;
     content: ' ';
     display: inline-block;
     height: 20px;
@@ -61,8 +60,10 @@ a.toc-link {
     margin-top: -1px;
     position: absolute;
     width: 2px
+
 }
 
 .is-active-link::before {
+    overflow: auto;
     background-color: #54BC4B
 }

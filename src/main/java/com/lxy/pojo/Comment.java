@@ -34,4 +34,6 @@ public class Comment {
 
     private Comment parentComment;
 
+    private boolean adminComment;
+
 }

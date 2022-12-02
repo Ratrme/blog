@@ -51,18 +51,18 @@
                             <h3 class="ui header">博客</h3>
                         </div>
                         <div class="right aligned column">
-                            共<h2 class="ui orange header m-inline-block m-text-thin" th:text="${blogs.getTotal()}"> 14 </h2>&nbsp;篇
+                            共&nbsp;<h2 class="ui orange header m-inline-block m-text-thin" th:text="${blogs.getTotal()}"> 14 </h2>&nbsp;篇
                         </div>
                     </div>
                 </div>
 
                 <!--content-->
-                <div class="ui padding attached segment m-bg" th:each="blog : ${blogs.list}">
-                    <div class="ui vertical segment m-padded-tb">
+                <div class="ui padding attached segment m-bg">
+                    <div class="ui vertical segment m-padded-tb" th:each="blog : ${blogs.list}">
                         <div class="ui middle aligned mobile reversed stackable grid">
                             <div class="eleven wide column">
                                 <h3 class="ui header"><a class="m-color" href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" th:text="${blog.title}">Vue入门</a></h3>
-                                <p class="m-text" th:text="|${blog.description}......|">Vue 是一套用于构建用户界面的渐进式框架。它与其它大型框架不同的是，Vue
+                                <p class="m-text" th:utext="|${blog.description}...|">Vue 是一套用于构建用户界面的渐进式框架。它与其它大型框架不同的是，Vue
                                     被设计为可以自底向上逐层应用</p>
                                 <div class="ui grid">
                                     <div class="eleven wide column">
@@ -74,10 +74,11 @@
                                                 <div class="content"><a href="#" th:text="@{${blog.user.nickname}}" class="header">Ratrme</a></div>
                                             </div>
                                             <div class="item">
-                                                <i class="calendar icon"></i>&nbsp;<span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2022-11-17</span>
+                                                <i class="calendar icon" style="margin-bottom:3px"></i>&nbsp;<span th:text="${#dates.format(blog.createTime,'yyyy-MM-dd')}">2022-11-17</span>
                                             </div>
                                             <div class="item">
-                                                <i class="eye icon"></i>&nbsp;&nbsp;<span th:text="${blog.views}">100</span>
+                                                <i class="eye icon"  style="margin-bottom:1px"></i>&nbsp;&nbsp;<span th:text="${blog.views}">100</span>&nbsp;&nbsp;&nbsp;
+                                                <i  style="margin-bottom:1px" th:if="${blog.views} > 2000" class="red hotjar icon"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -91,7 +92,7 @@
                             </div>
                             <div class="five wide column">
                                 <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">
-                                    <img src="../static/images/blog30.jpg" th:src="${blog.firstPicture}" style="width: 200px;height: 120px" alt=""
+                                    <img src="../static/images/blog30.jpg" th:src="${blog.firstPicture}" alt=""
                                          class="ui rounded image m-image">
                                 </a>
                             </div>
@@ -164,9 +165,9 @@
                         </div>
                     </div>
                     <div class="ui segment m-bg">
-                        <a href="#" target="_blank" class="ui grey basic label m-margin-tb-tiny" th:each="tag : ${tags}">
-                           <span th:text="${tag.name}"></span>
-                            <div class="detail"><span th:text="${#arrays.length(tag.blogs)}"></span></div>
+                        <a href="#" target="_blank" style="background: hsla(0,0%,100%,.001) !important;" class="ui grey basic label m-margin-tb-tiny" th:each="tag : ${tags}">
+                           <span class="m-color" th:text="${tag.name}"></span>
+                            <div class="detail"><span class="m-color" th:text="${#arrays.length(tag.blogs)}"></span></div>
                         </a>
                     </div>
 

@@ -15,6 +15,9 @@ public interface BlogMapper {
     //3、查询：（博客ID） 查询博客信息
     Blog getBlogById(Long id);
 
+
+    Blog getBlogByIdFront(Long id);
+
     //4、查询所有的博客
     List<Blog> getAllBlog();
 
@@ -26,6 +29,8 @@ public interface BlogMapper {
     List<Blog> getByTime(Integer size);
 
     List<Blog> getByTimeRecommend(Integer size);
+
+    List<Blog> getBySearch(String query);
 
     //8、查询：通过Search对象（title、typeName, recommend）, 查询博客信息
     List<Blog> getBlogsBySearchInfo(BlogQuery searchInfo);

@@ -158,6 +158,10 @@ body::before {
     color: #333 !important;
 }
 
+.m-blue {
+    color: #4183c4;
+}
+
 
 /*-----transform-----*/
 .m-image:hover {

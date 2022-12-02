@@ -53,7 +53,6 @@ public class Blog {
     private String tagIds;
 
     private User user;
-    private Long userId;
 
     private List<Comment> comments;
 

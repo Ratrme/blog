@@ -9,7 +9,7 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.lxy.pojo
   configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
 
 pagehelper:
@@ -18,10 +18,8 @@ pagehelper:
   supportMethodsArguments: true
   params: count=countSql
 
-
-
-frontTypeSize: 6
-frontTagSize: 10
-frontHotSize: 6
-frontNewRecommend: 6
+frontHotSize: 10
+frontNewRecommend: 10
 frontNewSize: 3
+
+commentAvatar: /images/avatar.jpg

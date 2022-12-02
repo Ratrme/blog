@@ -38,8 +38,8 @@ public class TypeServiceImpl implements TypeService {
     }
 
     @Override
-    public List<Type> getFrontTypes(Integer size) {
-        return typeMapper.getFrontTypes(size);
+    public List<Type> getFrontTypes() {
+        return typeMapper.getFrontTypes();
     }
 
 

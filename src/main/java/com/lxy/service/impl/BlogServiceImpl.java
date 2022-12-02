@@ -6,7 +6,9 @@ import com.lxy.mapper.TagMapper;
 import com.lxy.pojo.Blog;
 import com.lxy.pojo.Tag;
 import com.lxy.service.BlogService;
+import com.lxy.utils.MarkdownUtils;
 import com.lxy.vo.BlogQuery;
+import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +40,23 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    public Blog getBlogByIdFront(Long id) throws NotFoundException {
+        Blog blogById = blogMapper.getBlogByIdFront(id);
+        if (blogById == null) {
+            throw new NotFoundException("该博客不存在！");
+        }
+        List<Long> longs = blogTagsMapper.selectByBlogId(id);
+        List<Tag> allTags = tagMapper.getAllTags(longs);
+        String tags = tagsToIds(allTags);
+        blogById.setTagIds(tags);
+        String content = blogById.getContent();
+        String html = MarkdownUtils.markdownToHtmlExtensions(content);
+        blogById.setContent(html);
+        return blogById;
+    }
+
+    @Transactional
+    @Override
     public int addViews(Long id) {
         return 0;
     }
@@ -60,6 +79,11 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public List<Blog> getByTimeRecommend(Integer size) {
         return blogMapper.getByTimeRecommend(size);
+    }
+
+    @Override
+    public List<Blog> getBySearch(String query) {
+        return blogMapper.getBySearch(query);
     }
 
 

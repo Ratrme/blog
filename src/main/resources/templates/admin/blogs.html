@@ -140,6 +140,7 @@
                     <td th:text="${#dates.format(blog.createTime,'yyyy-MM-dd')}">2022-11-19</td>
                     <td th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2022-11-19</td>
                     <td>
+                        <a th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="ui blue basic mini button">查看</a>
                         <a th:href="@{/admin/blogs/edit/{id}(id=${blog.id})}" class="ui orange basic mini button">编辑</a>
                         <a th:href="@{/admin/blogs/delete/{id}(id=${blog.id})}"
                            class="ui red basic mini button">删除</a>

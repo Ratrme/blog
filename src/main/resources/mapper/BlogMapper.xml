@@ -17,7 +17,29 @@
                published,
                create_time,
                update_time,
-               type_id
+               type_id,
+               user_id
+        from t_blog
+        where t_blog.id = #{id}
+    </select>
+
+    <select id="getBlogByIdFront" resultMap="BlogMap">
+        select id,
+        title,
+        content,
+        first_picture,
+        description,
+        flag,
+        views,
+        appreciation,
+        share_statement,
+        commentable,
+        recommend,
+        published,
+        create_time,
+        update_time,
+        type_id,
+        user_id
         from t_blog
         where t_blog.id = #{id}
     </select>
@@ -26,15 +48,17 @@
     <select id="getAllBlog" resultMap="BlogMap">
         select *
         from blog.t_blog
+        where published = true
+        order by create_time desc
     </select>
 
     <select id="getType" resultType="Type">
-        select *
+        select id, name
         from t_type
         where id = #{id};
     </select>
     <select id="getUser" resultType="User">
-        select *
+        select id, nickname, avatar,type
         from t_user
         where id = #{id};
     </select>
@@ -141,7 +165,7 @@
     <select id="getByTime" resultType="com.lxy.pojo.Blog">
         select *
         from t_blog
-        order by update_time desc
+        order by create_time desc
         limit 0,#{size}
     </select>
 
@@ -149,7 +173,16 @@
         select *
         from t_blog
         where recommend = true
-        order by update_time desc
+        order by create_time desc
         limit 0,#{size}
     </select>
+
+    <select id="getBySearch" resultMap="BlogMap">
+        select *
+        from t_blog
+        where published = true and (title like concat('%', #{query}, '%')
+           or (description like concat('%', #{query}, '%')
+            and content like concat('%', #{query}, '%')))
+    </select>
+
 </mapper>

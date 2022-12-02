@@ -49,8 +49,8 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public List<Tag> getFrontTags(Integer size) {
-        return tagMapper.getFrontTags(size);
+    public List<Tag> getFrontTags() {
+        return tagMapper.getFrontTags();
     }
 
 
