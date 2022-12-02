@@ -154,7 +154,8 @@
                             </a>
                             <div class="content">
                                 <a class="author" th:text="${comment.nickname}">张三</a>
-                                <a href="#" th:href="@{/about}" th:if="${comment.adminComment}">管理员</a>
+                                <a href="#" th:href="@{/about}" th:if="${comment.adminComment}" style="color:#0a28e1">管理员</a>
+                                <a href="#" th:if="${!comment.adminComment}" style="color:#0a28e1">游客</a>
                                 <div class="metadata">
                                     <span class="date" th:text="${#dates.format(comment.createTime,'yyyy-MM-dd HH:mm')}">今天下午 5:42</span>
                                 </div>
@@ -162,6 +163,31 @@
                                 <div class="actions">
                                     <a class="reply" data-commentid="1" th:attr="data-commentid=${comment.id},data-commentnickname=${comment.nickname}"
                                        data-commentnickname="张三" onclick="reply(this)">回复</a>
+                                    <a href="#" th:href="@{/comments/{id}/{blogId}(id=${comment.id},blogId=${comment.blog.id})}" th:if="${blogUser} != null ? ${blogUser.type} == 1: false">删除</a>
+                                </div>
+                            </div>
+                            <div class="comments" th:if="${#arrays.length(comment.replyComments)} > 0">
+                                <div class="comment" th:each="reply : ${comment.replyComments}">
+                                    <a class="avatar">
+                                        <img src="../static/images/touxiang.jpg" th:src="@{${reply.avatar}}">
+                                    </a>
+                                    <div class="content">
+                                        <a class="author">
+                                            <span th:text="${reply.nickname}">约翰</span>
+                                            <a href="#" th:href="@{/about}" th:if="${reply.adminComment}" style="color:#0a28e1">管理员</a>
+                                            <a href="#" th:if="${!reply.adminComment}" style="color:#0a28e1">游客</a>
+                                            <span th:text="|@${reply.parentComment.nickname}|" style="color:#79A8D6"></span>
+                                        </a>
+                                        <div class="metadata">
+                                            <span class="date" th:text="${#dates.format(reply.createTime,'yyyy-MM-dd HH:mm')}">刚刚</span>
+                                        </div>
+                                        <div class="text" th:text="${reply.content}">艾略特你永远是多么正确 :)</div>
+                                        <div class="actions">
+                                            <a class="reply" data-commentid="1" th:attr="data-commentid=${reply.id},data-commentnickname=${reply.nickname}"
+                                               data-commentnickname="张三" onclick="reply(this)">回复</a>
+                                            <a href="#" th:href="@{/comments/{id}/{blogId}(id=${reply.id},blogId=${comment.blog.id})}" th:if="${blogUser} != null ? ${blogUser.type} == 1: false">删除</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -224,13 +250,13 @@
                 <input type="hidden" name="blog.id" th:value="${blog.id}">
                 <input type="hidden" name="parentComment.id" value="-1">
                 <div class="fields">
-                    <div class="field m-mobile-wide m-margin-bottom-small" th:if="${user} != null?${user.type}!=1 : true">
+                    <div class="field m-mobile-wide m-margin-bottom-small" th:if="${blogUser} != null?${blogUser.type}!=1 : true">
                         <div class="ui left icon input">
                             <i class="user icon"></i>
                             <input type="text" name="nickname" placeholder="昵称" class="m-bg">
                         </div>
                     </div>
-                    <div class="field m-mobile-wide m-margin-bottom-small" th:if="${user} != null?${user.type}!=1 : true">
+                    <div class="field m-mobile-wide m-margin-bottom-small" th:if="${blogUser} != null?${blogUser.type}!=1 : true">
                         <div class="ui left icon input">
                             <i class="mail icon"></i>
                             <input type="text" name="email" placeholder="邮箱" class="m-bg">
@@ -430,11 +456,10 @@
             console.log('校验失败')
         }
     });
-    window.onload = function post() {
-        $('#comment-container').load(/*[[@{/comment}]]*/"",{
-            "blog.id": $("[name='blog.id']").val()
-        })
-    }
+
+    $(function () {
+        $("#comment-container").load(/*[[@{/comments/{id}(id=${blog.id})}]]*/"");
+    })
 
     function postData() {
         $('#comment-container').load(/*[[@{/comments}]]*/"", {

@@ -6,12 +6,12 @@ import java.util.List;
 
 public interface CommentService {
 
+    List<Comment> listComments(Long blogId);
+
+
     int saveComment(Comment comment);
 
-
-    int deleteByCommentId(Long id);
-
-    List<Comment> getCommentsByBlogId(Long blogId);
+    int deleteComments(Long id);
 
 
 }

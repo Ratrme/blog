@@ -1,5 +1,6 @@
 package com.lxy.service.impl;
 
+import com.lxy.exception.NotFoundException;
 import com.lxy.mapper.BlogMapper;
 import com.lxy.mapper.BlogTagsMapper;
 import com.lxy.mapper.TagMapper;
@@ -8,7 +9,6 @@ import com.lxy.pojo.Tag;
 import com.lxy.service.BlogService;
 import com.lxy.utils.MarkdownUtils;
 import com.lxy.vo.BlogQuery;
-import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,7 +40,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public Blog getBlogByIdFront(Long id) throws NotFoundException {
+    public Blog getBlogByIdFront(Long id){
         Blog blogById = blogMapper.getBlogByIdFront(id);
         if (blogById == null) {
             throw new NotFoundException("该博客不存在！");
@@ -58,7 +58,9 @@ public class BlogServiceImpl implements BlogService {
     @Transactional
     @Override
     public int addViews(Long id) {
-        return 0;
+        Blog blog = new Blog();
+        blog.setId(id);
+        return blogMapper.addViews(blog);
     }
 
     @Override
@@ -121,6 +123,7 @@ public class BlogServiceImpl implements BlogService {
     public Long getBlogNums() {
         return null;
     }
+
 
 
     public void handlerBlogTag(Long blogId, List<Tag> tags) {

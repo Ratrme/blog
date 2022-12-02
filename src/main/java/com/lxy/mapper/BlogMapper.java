@@ -22,7 +22,7 @@ public interface BlogMapper {
     List<Blog> getAllBlog();
 
 
-    int addViews(Long id);
+    int addViews(Blog blog);
 
     List<Blog> getByViews(Integer size);
 

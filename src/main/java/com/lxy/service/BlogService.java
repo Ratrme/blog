@@ -12,7 +12,7 @@ public interface BlogService {
     //3、查询：（博客ID） 查询博客信息
     Blog getBlogById(Long id);
 
-    Blog getBlogByIdFront(Long id) throws NotFoundException;
+    Blog getBlogByIdFront(Long id);
 
     //7、更新：通过（博客id）， 更新博客（访问次数+1）
     int addViews(Long id);

@@ -32,20 +32,14 @@ public class CommentController {
     private String avatar;
 
     @GetMapping("comments/{blogId}")
-    public String comments(@PathVariable Long blogId, Model model) {
-        List<Comment> commentsByBlogId = commentService.getCommentsByBlogId(blogId);
+    public String comments(@PathVariable Long blogId, Model model,HttpSession session) {
+        List<Comment> commentsByBlogId = commentService.listComments(blogId);
+        User user = (User) session.getAttribute("user");
         model.addAttribute("comments", commentsByBlogId);
+        model.addAttribute("blogUser", user);
         return "blog :: commentList";
     }
 
-
-    @PostMapping("comment")
-    public String postShow(Comment comment, Model model){
-        Long id = comment.getBlog().getId();
-        List<Comment> commentsByBlogId = commentService.getCommentsByBlogId(id);
-        model.addAttribute("comments", commentsByBlogId);
-        return "blog :: commentList";
-    }
 
     @PostMapping("comments")
     public String postSave(Comment comment, HttpSession session){
@@ -62,5 +56,14 @@ public class CommentController {
         }
         commentService.saveComment(comment);
         return "redirect:/comments/" + id;
+    }
+
+    @GetMapping("comments/{id}/{blogId}")
+    public String delete(@PathVariable Long id,@PathVariable Long blogId,HttpSession session){
+        User user = (User) session.getAttribute("user");
+        if(user != null){
+            commentService.deleteComments(id);
+        }
+        return "redirect:/blog/" + blogId;
     }
 }

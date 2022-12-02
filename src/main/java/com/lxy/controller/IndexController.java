@@ -70,14 +70,15 @@ public class IndexController {
     }
     
     @GetMapping("blog/{id}")
-    public String blog(@PathVariable Long id, Model model, HttpSession session) throws NotFoundException {
+    public String blog(@PathVariable Long id, Model model,HttpSession session){
         Blog blogById = blogService.getBlogByIdFront(id);
+        blogService.addViews(id);
         String tagIds = blogById.getTagIds();
         List<Tag> allTags = tagService.getAllTags(tagIds);
         User user = (User) session.getAttribute("user");
         model.addAttribute("blog",blogById);
         model.addAttribute("tags",allTags);
-        model.addAttribute("user",user);
+        model.addAttribute("blogUser",user);
         model.addAttribute("newBlogs",blogService.getByTime(newSize));
         return "blog";
     }
