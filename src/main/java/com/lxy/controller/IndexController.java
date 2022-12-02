@@ -10,7 +10,6 @@ import com.lxy.service.BlogService;
 import com.lxy.service.TagService;
 import com.lxy.service.TypeService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -43,6 +42,7 @@ public class IndexController {
 
     @Value("${frontNewRecommend}")
     private Integer newRecommend;
+
     @GetMapping()
     public String index(@RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum
             , Model model) {
@@ -54,32 +54,32 @@ public class IndexController {
         model.addAttribute("tags", tagService.getFrontTags());
         model.addAttribute("hotBlogs", blogService.getViews(hotSize));
         model.addAttribute("newRecommendBlogs", blogService.getByTimeRecommend(newRecommend));
-        model.addAttribute("newBlogs",blogService.getByTime(newSize));
+        model.addAttribute("newBlogs", blogService.getByTime(newSize));
         return "index";
     }
 
     @PostMapping("search")
     public String search(@RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum
-            ,@RequestParam String query, Model model){
+            , @RequestParam String query, Model model) {
         List<Blog> allBlog = blogService.getBySearch(query);
         PageInfo<Blog> pageInfo = new PageInfo<>(allBlog);
         model.addAttribute("blogs", pageInfo);
-        model.addAttribute("query",query);
-        model.addAttribute("newBlogs",blogService.getByTime(newSize));
+        model.addAttribute("query", query);
+        model.addAttribute("newBlogs", blogService.getByTime(newSize));
         return "search";
     }
-    
+
     @GetMapping("blog/{id}")
-    public String blog(@PathVariable Long id, Model model,HttpSession session){
+    public String blog(@PathVariable Long id, Model model, HttpSession session) {
         Blog blogById = blogService.getBlogByIdFront(id);
         blogService.addViews(id);
         String tagIds = blogById.getTagIds();
         List<Tag> allTags = tagService.getAllTags(tagIds);
         User user = (User) session.getAttribute("user");
-        model.addAttribute("blog",blogById);
-        model.addAttribute("tags",allTags);
-        model.addAttribute("blogUser",user);
-        model.addAttribute("newBlogs",blogService.getByTime(newSize));
+        model.addAttribute("blog", blogById);
+        model.addAttribute("tags", allTags);
+        model.addAttribute("blogUser", user);
+        model.addAttribute("newBlogs", blogService.getByTime(newSize));
         return "blog";
     }
 }
