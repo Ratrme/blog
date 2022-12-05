@@ -43,7 +43,7 @@ public class BlogsController {
         PageInfo<Blog> pageInfo = new PageInfo<>(allBlog);
         model.addAttribute("blogs", pageInfo);
         model.addAttribute("types", typeService.getAllType());
-        return "/admin/blogs";
+        return "admin/blogs";
     }
 
     @PostMapping("/blogs/search")
@@ -54,7 +54,7 @@ public class BlogsController {
         PageInfo<Blog> pageInfo = new PageInfo<>(allBlog);
         model.addAttribute("blogs", pageInfo);
         model.addAttribute("types", typeService.getAllType());
-        return "/admin/blogs :: blogList";
+        return "admin/blogs :: blogList";
     }
 
     @GetMapping("/blogs/input")
@@ -62,7 +62,7 @@ public class BlogsController {
         model.addAttribute("types", typeService.getAllType());
         model.addAttribute("tags", tagService.getAllTags());
         model.addAttribute("blog", new Blog());
-        return "/admin/blogs-input";
+        return "admin/blogs-input";
     }
 
     @GetMapping("/blogs/edit/{id}")
@@ -71,7 +71,7 @@ public class BlogsController {
         model.addAttribute("tags", tagService.getAllTags());
         Blog blog = blogService.getBlogById(id);
         model.addAttribute("blog", blog);
-        return "/admin/blogs-input";
+        return "admin/blogs-input";
     }
 
 
@@ -88,9 +88,9 @@ public class BlogsController {
             } else {
                 attributes.addFlashAttribute("error", "新增失败！");
             }
-            return "redirect:/admin/blogs";
+            return "redirect:admin/blogs";
         } else {
-            return "redirect:/admin/index";
+            return "redirect:admin/index";
         }
     }
 
@@ -107,7 +107,7 @@ public class BlogsController {
         } else {
             attributes.addFlashAttribute("error", "修改失败！");
         }
-        return "redirect:/admin/blogs";
+        return "redirect:admin/blogs";
     }
 
 
@@ -119,6 +119,6 @@ public class BlogsController {
         } else {
             attributes.addFlashAttribute("error", "删除失败！");
         }
-        return "redirect:/admin/blogs";
+        return "redirect:admin/blogs";
     }
 }

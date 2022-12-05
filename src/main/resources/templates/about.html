@@ -21,8 +21,6 @@
             <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
             <a href="#" class="m-item item m-mobile-hide"><i class="clone icon"></i>归档</a>
             <a href="#" class="active m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
-            <a href="#" class="m-item item m-mobile-hide"><i class="mail icon"></i>留言板</a>
-            <a href="#" class="m-item item m-mobile-hide"><i class="linkify icon"></i>友链</a>
             <div class="m-item right item m-mobile-hide">
                 <div class="ui icon transparent input">
                     <input type="text" placeholder="Search">
@@ -53,11 +51,11 @@
                     </p>
                     <h2>About my blog</h2>
                     <br>
-                    <p>域 名：创建于2022年11月25日</p>
+                    <p>域 名：创建于2022年12月5日</p>
                     <br>
-                    <p>服务器：阿里云服务器</p>
+                    <p>服务器：阿里云轻量服务器</p>
                     <br>
-                    <p>备案号：桂ICP备20002883号-1</p>
+                    <p>备案号：豫ICP备2022027558号-1</p>
                     <br>
                     <p>技术： Java Springboot Mybatis</p>
                 </div>
@@ -69,10 +67,11 @@
                 </div>
                 <div class="ui card attached segment m-bg">
                     <div class="ui segment m-bg">
-                        <img src="../static/images/touxiang.jpg" alt="" class="ui image">
+                        <img src="../static/images/touxiang.jpg" th:src="${user.avatar}" alt="" class="ui image">
                     </div>
                     <a href="#" class="ui center aligned m-padded-tb-small"
-                       style="color: black;font-size: 18px;font-weight: 800;">
+                       style="color: black;font-size: 18px;font-weight: 800;"
+                        th:text="${user.nickname}">
                         Ratrme
                     </a>
                 </div>
@@ -80,16 +79,16 @@
                     <p class="m-text">只要学不死，就往死里学。内卷太严重了，不学没饭吃啊！</p>
                 </div>
                 <div class="ui bottom attached center aligned segment m-bg">
-                    <a href="#" class="ui steam circular icon button" data-content="1070626113"
+                    <a class="ui steam circular icon button" data-content="1070626113"
                        data-position="bottom center"><i class="black steam icon"></i></a>
                     <a href="https://github.com/Ratrme" target="_blank" class="ui github circular icon button"
                        data-content="Ratrme"
                        data-position="bottom center"><i class="black github icon"></i></a>
-                    <a href="#" class="ui inverted wechat circular icon button"><i class="green weixin icon"></i></a>
-                    <a href="#" class="ui inverted qq circular icon button" data-content="1628337281"
+                    <a class="ui inverted wechat circular icon button"><i class="green weixin icon"></i></a>
+                    <a class="ui inverted qq circular icon button" data-content="1628337281"
                        data-position="bottom center"><i class="blue qq icon"></i></a>
                     <div class="ui wechat-qr flowing popup transition hidden">
-                        <img src="../static/images/weixin.jpg" alt="" class="ui rounded image" style="width: 110px">
+                        <img src="../static/images/weixin.jpg" th:src="@{/images/weixin.jpg}" alt="" class="ui rounded image" style="width: 110px">
                     </div>
                 </div>
             </div>

@@ -14,7 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class BlogServiceImpl implements BlogService {
@@ -94,6 +96,17 @@ public class BlogServiceImpl implements BlogService {
         return blogMapper.getBlogsBySearchInfo(searchInfo);
     }
 
+    @Override
+    public Map<String, List<Blog>> archivesBlog() {
+        List<String> years = blogMapper.getYears();
+        Map<String,List<Blog>> blogMap = new HashMap<String,List<Blog>>();
+        for (String year : years) {
+            List<Blog> blogs = blogMapper.getByYear(year);
+            blogMap.put(year, blogs);
+        }
+        return blogMap;
+    }
+
     @Transactional
     @Override
     public int saveBlog(Blog blog) {
@@ -119,10 +132,6 @@ public class BlogServiceImpl implements BlogService {
         return blogMapper.deleteBlog(id);
     }
 
-    @Override
-    public Long getBlogNums() {
-        return null;
-    }
 
 
 

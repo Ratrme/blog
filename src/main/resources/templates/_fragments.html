@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:replace="${title}">博客详情</title>
+    <link rel="icon" href="../static/images/favicon.jpg" type="image/x-icon" th:href="@{/images/favicon.jpg}">
     <link rel="stylesheet" href="../static/lib/semantic-ui/semantic.min.css"
           th:href="@{/lib/semantic-ui/semantic.min.css}">
     <link rel='stylesheet prefetch'
@@ -23,19 +24,17 @@
 <nav th:fragment="menu(n)" class="ui attached segment m-padded-tb-mini m-shadow-small m-bg">
     <div class="ui container">
         <div class="ui secondary stackable menu">
-            <a href="index.html" class="item" title="首页">
+            <a th:href="@{/}" class="item" title="首页">
                 <h1 class="ui header item">Ratrme</h1>
             </a>
-            <a href="#" th:href="@{/}" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i
+            <a th:href="@{/}" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i
                     class="home icon"></i>首页</a>
-            <a href="#" th:href="@{types.html}" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i
+            <a th:href="@{/types/-1}" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i
                     class="idea icon"></i>分类</a>
-            <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="tags icon"></i>标签</a>
-            <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==4} ? 'active'"><i class="clone icon"></i>归档</a>
-            <a href="" class="m-item item m-mobile-hide" th:classappend="${n==5} ? 'active'"><i class="info icon"></i>关于我</a>
-            <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==6} ? 'active'"><i class="mail icon"></i>留言板</a>
-            <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==7} ? 'active'"><i
-                    class="linkify icon"></i>友链</a>
+            <a th:href="@{/tags/-1}" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="tags icon"></i>标签</a>
+            <a  th:href="@{/archives}" class="m-item item m-mobile-hide" th:classappend="${n==4} ? 'active'"><i class="clone icon"></i>归档</a>
+            <a  th:href="@{/about}" class="m-item item m-mobile-hide" th:classappend="${n==5} ? 'active'"><i class="info icon"></i>关于我</a>
+            <a  th:href="@{/admin}" class="m-item item m-mobile-hide"><i class="user icon"></i>后台</a>
             <div class="m-item right item m-mobile-hide">
                 <form name="search" th:action="@{/search}" method="post" target="_blank">
                     <div class="ui icon transparent input">
@@ -46,7 +45,7 @@
             </div>
         </div>
     </div>
-    <a href="#" class="ui menu toggle icon button m-top-right m-mobile-show">
+    <a class="ui menu toggle icon button m-top-right m-mobile-show">
         <i class="sidebar icon"></i>
     </a>
 </nav>
@@ -65,7 +64,7 @@
             <div class="four wide column">
                 <h4 class="ui header m-text-thin m-text-spaced">最新的博客</h4>
                 <div class="ui link list">
-                    <a href="#" target="_blank" class="item" th:each="newBlog : ${newBlogs}"><span
+                    <a  th:href="@{/blog/{id}(id=${newBlog.id})}" target="_blank" class="item" th:each="newBlog : ${newBlogs}"><span
                             th:text="${newBlog.title}"></span></a>
                 </div>
             </div>
@@ -85,7 +84,8 @@
             </div>
         </div>
         <div class="ui section divider"></div>
-        <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2020 - 2022 CPP Designed by Lu xiaoyang</p>
+        <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2022 - <span th:text="${#dates.format(new java.util.Date().getTime(),'yyyy')}"></span>  LXY Designed by Lu xiaoyang</p>
+        <p class="m-text-thin m-text-spaced m-opacity-tiny"><a href="https://beian.miit.gov.cn/" target="_blank" style="color:#000000DD!important">豫ICP备2022027558号-1</a></p>
     </div>
 </footer>
 </body>

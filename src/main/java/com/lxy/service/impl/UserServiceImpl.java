@@ -21,4 +21,9 @@ public class UserServiceImpl implements UserService {
     public User checkUser(String username, String password) {
         return userMapper.findByUsernameAndPassword(username, md5Utils.getMD5Str(password));
     }
+
+    @Override
+    public User getUser() {
+        return userMapper.getUser();
+    }
 }

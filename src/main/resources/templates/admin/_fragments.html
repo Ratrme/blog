@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:replace="${title}">博客管理</title>
+    <link rel="icon" href="../../static/images/favicon.jpg" type="image/x-icon" th:href="@{/images/favicon.jpg}">
     <link rel="stylesheet" href="../../static/lib/semantic-ui/semantic.min.css" th:href="@{/lib/semantic-ui/semantic.min.css}">
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/icon.min.css'>
     <link rel="stylesheet" href="../../static/lib/editormd/css/editormd.min.css" th:href="@{/lib/editormd/css/editormd.min.css}">
@@ -89,7 +90,8 @@
             </div>
         </div>
         <div class="ui section divider"></div>
-        <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2020 - 2022 CPP Designed by Lu xiaoyang</p>
+        <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2022 - <span th:text="${#dates.format(new java.util.Date().getTime(),'yyyy')}"></span>  LXY Designed by Lu xiaoyang</p>
+        <p class="m-text-thin m-text-spaced m-opacity-tiny"><a href="https://beian.miit.gov.cn/" target="_blank" style="color:#000000DD!important">豫ICP备2022027558号-1</a></p>
     </div>
 </footer>
 </body>

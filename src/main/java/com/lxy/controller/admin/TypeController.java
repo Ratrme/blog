@@ -36,19 +36,19 @@ public class TypeController {
         List<Type> allType = typeService.getAllType();
         PageInfo<Type> pageInfo = new PageInfo<>(allType);
         model.addAttribute("pageInfo",pageInfo);
-        return "/admin/types";
+        return "admin/types";
     }
 
     @GetMapping("/types/input")
     public String input(Model model){
         model.addAttribute("type",new Type());
-        return "/admin/types-input";
+        return "admin/types-input";
     }
 
     @GetMapping("/types/{id}")
     public String update(@PathVariable Long id, Model model){
         model.addAttribute("type", typeService.getType(id));
-        return "/admin/types-input";
+        return "admin/types-input";
     }
 
 
@@ -59,7 +59,7 @@ public class TypeController {
             result.rejectValue("name", "nameError","已有该分类，请勿重复添加！");
         }
         if (result.hasErrors()) {
-            return "/admin/types-input";
+            return "admin/types-input";
         }
         int i = typeService.saveType(type);
         if (i == 1) {
@@ -67,7 +67,7 @@ public class TypeController {
         } else {
             attributes.addFlashAttribute("error","分类添加失败！");
         }
-        return "redirect:/admin/types";
+        return "redirect:admin/types";
     }
 
     @PostMapping("/types/update/{id}")
@@ -77,7 +77,7 @@ public class TypeController {
             result.rejectValue("name", "nameError","已有该分类，请勿重复添加！");
         }
         if (result.hasErrors()) {
-            return "/admin/types-input";
+            return "admin/types-input";
         }
         int i = typeService.updateType(type);
         if (i == 1) {
@@ -85,13 +85,13 @@ public class TypeController {
         } else {
             attributes.addFlashAttribute("error","分类修改失败！");
         }
-        return "redirect:/admin/types";
+        return "redirect:admin/types";
     }
 
     @GetMapping("/types/delete/{id}")
     public String delete(@PathVariable Long id, RedirectAttributes attributes){
         typeService.deleteType(id);
         attributes.addFlashAttribute("message","分类删除成功！");
-        return "redirect:/admin/types";
+        return "redirect:admin/types";
     }
 }

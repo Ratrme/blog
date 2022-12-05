@@ -35,6 +35,10 @@ public interface BlogMapper {
     //8、查询：通过Search对象（title、typeName, recommend）, 查询博客信息
     List<Blog> getBlogsBySearchInfo(BlogQuery searchInfo);
 
+    List<String> getYears();
+
+    List<Blog> getByYear(String year);
+
     //9、添加: 通过Blog对象, 并返回博客（自增ID）
     int saveBlog(Blog blog);
 
@@ -42,4 +46,8 @@ public interface BlogMapper {
     int updateBlog(Blog blog);
 
     int deleteBlog(Long id);
+
+    List<Blog> getByTagId(Long id);
+
+    int getCount();
 }

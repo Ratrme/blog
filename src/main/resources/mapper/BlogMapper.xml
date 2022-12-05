@@ -52,12 +52,12 @@
         order by create_time desc
     </select>
 
-    <select id="getType" resultType="Type">
+    <select id="getType" resultType="com.lxy.pojo.Type">
         select id, name
         from t_type
         where id = #{id};
     </select>
-    <select id="getUser" resultType="User">
+    <select id="getUser" resultType="com.lxy.pojo.User">
         select id, nickname, avatar,type
         from t_user
         where id = #{id};
@@ -65,20 +65,21 @@
 
     <select id="getBlogsBySearchInfo" resultMap="BlogMap">
         select id,
-               title,
-               content,
-               first_picture,
-               description,
-               flag,
-               views,
-               appreciation,
-               share_statement,
-               commentable,
-               recommend,
-               published,
-               create_time,
-               update_time,
-               type_id
+        title,
+        content,
+        first_picture,
+        description,
+        flag,
+        views,
+        appreciation,
+        share_statement,
+        commentable,
+        recommend,
+        published,
+        create_time,
+        update_time,
+        type_id,
+        user_id
         from t_blog
         <where>
             <if test="title != null and title != ''">
@@ -95,7 +96,7 @@
             </if>
         </where>
     </select>
-    <resultMap id="BlogMap" type="Blog">
+    <resultMap id="BlogMap" type="com.lxy.pojo.Blog">
         <result property="id" column="id"/>
         <result property="title" column="title"/>
         <result property="content" column="content"/>
@@ -110,9 +111,9 @@
         <result property="recommend" column="recommend"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
-        <association property="type" column="type_id" javaType="Type" select="getType">
+        <association property="type" column="type_id" javaType="com.lxy.pojo.Type" select="getType">
         </association>
-        <association property="user" column="user_id" javaType="User" select="getUser">
+        <association property="user" column="user_id" javaType="com.lxy.pojo.User" select="getUser">
         </association>
     </resultMap>
     <!--9、更新：通过（博客id）， 更新博客（访问次数+1）-->
@@ -131,7 +132,7 @@
                 #{commentable}, #{published}, #{recommend}, #{type.id}, #{user.id});
     </insert>
 
-    <update id="updateBlog" parameterType="Blog" useGeneratedKeys="true" keyProperty="id">
+    <update id="updateBlog" parameterType="com.lxy.pojo.Blog" useGeneratedKeys="true" keyProperty="id">
         update t_blog
         set title          = #{title},
             content        = #{content},
@@ -169,6 +170,8 @@
         limit 0,#{size}
     </select>
 
+
+
     <select id="getByTimeRecommend" resultType="com.lxy.pojo.Blog">
         select *
         from t_blog
@@ -176,6 +179,8 @@
         order by create_time desc
         limit 0,#{size}
     </select>
+
+
 
     <select id="getBySearch" resultMap="BlogMap">
         select *
@@ -185,4 +190,44 @@
             and content like concat('%', #{query}, '%')))
     </select>
 
+
+
+    <resultMap id="TagIdBlog" type="com.lxy.pojo.Blog">
+        <result property="id" column="bid"/>
+        <result property="title" column="title"/>
+        <result property="firstPicture" column="first_picture"/>
+        <result property="description" column="description"/>
+        <result property="views" column="views"/>
+        <result property="createTime" column="create_time"/>
+        <association property="type" column="type_id" javaType="com.lxy.pojo.Type" select="getType">
+        </association>
+        <association property="user" column="user_id" javaType="com.lxy.pojo.User" select="getUser">
+        </association>
+    </resultMap>
+    <select id="getByTagId" resultMap="TagIdBlog">
+        select b.id bid,b.title,b.type_id,b.user_id,b.views,b.create_time,b.description,b.first_picture,t.id tid,t.name
+        from t_blog b,t_blog_tags bt,t_tag t
+        where b.id = bt.blog_id
+        and bt.tags_id = t.id
+        and t.id = #{id}
+    </select>
+
+    <select id="getYears" resultType="java.lang.String">
+        select date_format(create_time, '%Y')
+        from t_blog
+        order by create_time desc
+    </select>
+
+    <select id="getByYear" resultType="com.lxy.pojo.Blog">
+        select *
+        from t_blog
+        where date_format(create_time,'%Y') = #{year}
+        order by create_time desc
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(*)
+        from t_blog
+        where published = true
+    </select>
 </mapper>

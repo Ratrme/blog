@@ -18,7 +18,7 @@
 </head>
 <body>
 <!--导航-->
-<nav th:replace="_fragments :: menu(1)" class="ui attached segment m-padded-tb-mini m-shadow-small m-bg">
+<nav th:replace="_fragments :: menu(0)" class="ui attached segment m-padded-tb-mini m-shadow-small m-bg">
     <div class="ui container">
         <div class="ui secondary stackable menu">
             <a href="index.html" class="item" title="首页">
@@ -29,8 +29,6 @@
             <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
             <a href="#" class="m-item item m-mobile-hide"><i class="clone icon"></i>归档</a>
             <a href="#" class="m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
-            <a href="#" class="m-item item m-mobile-hide"><i class="mail icon"></i>留言板</a>
-            <a href="#" class="m-item item m-mobile-hide"><i class="linkify icon"></i>友链</a>
             <div class="m-item right item m-mobile-hide">
                 <div class="ui icon transparent input">
                     <input type="text" placeholder="Search">
@@ -57,7 +55,8 @@
                     <div class="content"><a href="#" class="header" th:text="${blog.user.nickname}">Ratrme</a></div>
                 </div>
                 <div class="item">
-                    <i class="calendar icon" style="margin-bottom:4px"></i><span th:text="${#dates.format(blog.createTime,'yyyy-MM-dd')}">2022-11-17</span>
+                    <i class="calendar icon" style="margin-bottom:4px"></i><span
+                        th:text="${#dates.format(blog.createTime,'yyyy-MM-dd')}">2022-11-17</span>
                 </div>
                 <div class="item">
                     <i class="eye icon" style="margin-bottom:4px"></i>&nbsp;<span th:text="${blog.views}">100</span>&nbsp;&nbsp;&nbsp;
@@ -153,20 +152,31 @@
                                 <img src="../static/images/touxiang.jpg" th:src="@{${comment.avatar}}">
                             </a>
                             <div class="content">
-                                <a class="author" th:text="${comment.nickname}">张三</a>
-                                <a href="#" th:href="@{/about}" th:if="${comment.adminComment}" style="color:#0a28e1">管理员</a>
-                                <a href="#" th:if="${!comment.adminComment}" style="color:#0a28e1">游客</a>
+                                <a class="author">
+                                    <span th:text="${comment.nickname}">张三</span>
+                                    <div th:if="${comment.adminComment}"
+                                         class="ui mini basic blue left pointing label m-padded-mini">管理员
+                                    </div>
+                                    <div th:if="${!comment.adminComment}"
+                                         class="ui mini basic orange left pointing label m-padded-mini">游客
+                                    </div>
+                                </a>
                                 <div class="metadata">
-                                    <span class="date" th:text="${#dates.format(comment.createTime,'yyyy-MM-dd HH:mm')}">今天下午 5:42</span>
+                                    <span class="date"
+                                          th:text="${#dates.format(comment.createTime,'yyyy-MM-dd HH:mm')}">今天下午 5:42</span>
                                 </div>
                                 <div class="text" th:text="${comment.content}">太赞了！</div>
                                 <div class="actions">
-                                    <a class="reply" data-commentid="1" th:attr="data-commentid=${comment.id},data-commentnickname=${comment.nickname}"
+                                    <a class="reply" data-commentid="1"
+                                       th:attr="data-commentid=${comment.id},data-commentnickname=${comment.nickname}"
                                        data-commentnickname="张三" onclick="reply(this)">回复</a>
-                                    <a href="#" th:href="@{/comments/{id}/{blogId}(id=${comment.id},blogId=${comment.blog.id})}" th:if="${blogUser} != null ? ${blogUser.type} == 1: false">删除</a>
+                                    <a href="#"
+                                       th:href="@{/comments/{id}/{blogId}(id=${comment.id},blogId=${comment.blog.id})}"
+                                       th:if="${blogUser} != null ? ${blogUser.type} == 1: false">删除</a>
                                 </div>
                             </div>
-                            <div class="comments" th:if="${#arrays.length(comment.replyComments)} > 0">
+                            <div class="comments" style="margin: -1.5em 0 -1em 1.25em;padding: 3em 0 2em 2.25em;"
+                                 th:if="${#arrays.length(comment.replyComments)} > 0">
                                 <div class="comment" th:each="reply : ${comment.replyComments}">
                                     <a class="avatar">
                                         <img src="../static/images/touxiang.jpg" th:src="@{${reply.avatar}}">
@@ -174,74 +184,32 @@
                                     <div class="content">
                                         <a class="author">
                                             <span th:text="${reply.nickname}">约翰</span>
-                                            <a href="#" th:href="@{/about}" th:if="${reply.adminComment}" style="color:#0a28e1">管理员</a>
-                                            <a href="#" th:if="${!reply.adminComment}" style="color:#0a28e1">游客</a>
-                                            <span th:text="|@${reply.parentComment.nickname}|" style="color:#79A8D6"></span>
+                                            <div th:if="${reply.adminComment}"
+                                                 class="ui mini basic blue left pointing label m-padded-mini">管理员
+                                            </div>
+                                            <div th:if="${!reply.adminComment}"
+                                                 class="ui mini basic orange left pointing label m-padded-mini">游客
+                                            </div>
+                                            <span th:text="|@${reply.parentComment.nickname}|"
+                                                  style="color:#1684ee"></span>
                                         </a>
                                         <div class="metadata">
-                                            <span class="date" th:text="${#dates.format(reply.createTime,'yyyy-MM-dd HH:mm')}">刚刚</span>
+                                            <span class="date"
+                                                  th:text="${#dates.format(reply.createTime,'yyyy-MM-dd HH:mm')}">刚刚</span>
                                         </div>
                                         <div class="text" th:text="${reply.content}">艾略特你永远是多么正确 :)</div>
                                         <div class="actions">
-                                            <a class="reply" data-commentid="1" th:attr="data-commentid=${reply.id},data-commentnickname=${reply.nickname}"
+                                            <a class="reply" data-commentid="1"
+                                               th:attr="data-commentid=${reply.id},data-commentnickname=${reply.nickname}"
                                                data-commentnickname="张三" onclick="reply(this)">回复</a>
-                                            <a href="#" th:href="@{/comments/{id}/{blogId}(id=${reply.id},blogId=${comment.blog.id})}" th:if="${blogUser} != null ? ${blogUser.type} == 1: false">删除</a>
+                                            <a
+                                               th:href="@{/comments/{id}/{blogId}(id=${reply.id},blogId=${comment.blog.id})}"
+                                               th:if="${blogUser} != null ? ${blogUser.type} == 1: false">删除</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!--
-                        <div class="comment">
-                            <a class="avatar">
-                                <img src="../static/images/touxiang.jpg">
-                            </a>
-                            <div class="content">
-                                <a class="author">李四</a>
-                                <div class="metadata">
-                                    <span class="date">昨天上午12:30</span>
-                                </div>
-                                <div class="text">
-                                    <p>這對我的研究是非常有用.謝謝!</p>
-                                </div>
-                                <div class="actions">
-                                    <a class="reply">回复</a>
-                                </div>
-                            </div>
-                            <div class="comments">
-                                <div class="comment">
-                                    <a class="avatar">
-                                        <img src="../static/images/touxiang.jpg">
-                                    </a>
-                                    <div class="content">
-                                        <a class="author">约翰</a>
-                                        <div class="metadata">
-                                            <span class="date">刚刚</span>
-                                        </div>
-                                        <div class="text">艾略特你永远是多么正确 :)</div>
-                                        <div class="actions">
-                                            <a class="reply">回复</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="comment">
-                            <a class="avatar">
-                                <img src="../static/images/demo.jpg">
-                            </a>
-                            <div class="content">
-                                <a class="author">大卫</a>
-                                <div class="metadata">
-                                    <span class="date">5 天以前</span>
-                                </div>
-                                <div class="text">老兄，这太棒了。非常感谢。</div>
-                                <div class="actions">
-                                    <a class="reply">回复</a>
-                                </div>
-                            </div>
-                        </div>
-                        -->
                     </div>
                 </div>
             </div>
@@ -250,13 +218,15 @@
                 <input type="hidden" name="blog.id" th:value="${blog.id}">
                 <input type="hidden" name="parentComment.id" value="-1">
                 <div class="fields">
-                    <div class="field m-mobile-wide m-margin-bottom-small" th:if="${blogUser} != null?${blogUser.type}!=1 : true">
+                    <div class="field m-mobile-wide m-margin-bottom-small"
+                         th:if="${blogUser} != null?${blogUser.type}!=1 : true">
                         <div class="ui left icon input">
                             <i class="user icon"></i>
                             <input type="text" name="nickname" placeholder="昵称" class="m-bg">
                         </div>
                     </div>
-                    <div class="field m-mobile-wide m-margin-bottom-small" th:if="${blogUser} != null?${blogUser.type}!=1 : true">
+                    <div class="field m-mobile-wide m-margin-bottom-small"
+                         th:if="${blogUser} != null?${blogUser.type}!=1 : true">
                         <div class="ui left icon input">
                             <i class="mail icon"></i>
                             <input type="text" name="email" placeholder="邮箱" class="m-bg">
@@ -387,7 +357,7 @@
         position: 'left center'
     });
 
-    var server = "127.0.0.1:80";
+    var server = "ratrme.top";
     var url = /*[[@{/blog/{id}(id=${blog.id})}]]*/"";
 
     // 生成本页二维码

@@ -51,7 +51,8 @@
                             <h3 class="ui header">博客</h3>
                         </div>
                         <div class="right aligned column">
-                            共&nbsp;<h2 class="ui orange header m-inline-block m-text-thin" th:text="${blogs.getTotal()}"> 14 </h2>&nbsp;篇
+                            共&nbsp;<h2 class="ui orange header m-inline-block m-text-thin"
+                                        th:text="${blogs.getTotal()}"> 14 </h2>&nbsp;篇
                         </div>
                     </div>
                 </div>
@@ -61,9 +62,12 @@
                     <div class="ui vertical segment m-padded-tb" th:each="blog : ${blogs.list}">
                         <div class="ui middle aligned mobile reversed stackable grid">
                             <div class="eleven wide column">
-                                <h3 class="ui header"><a class="m-color" href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" th:text="${blog.title}">Vue入门</a></h3>
-                                <p class="m-text" th:utext="|${blog.description}...|">Vue 是一套用于构建用户界面的渐进式框架。它与其它大型框架不同的是，Vue
-                                    被设计为可以自底向上逐层应用</p>
+                                <h3 class="ui header"><a class="m-color" th:href="@{/blog/{id}(id=${blog.id})}"
+                                                         target="_blank" th:text="${blog.title}">Vue入门</a></h3>
+                                <p class="m-text">
+                                    <a th:utext="|${blog.description}...|" style="color:#000000DD" th:href="@{/blog/{id}(id=${blog.id})}">Vue
+                                        是一套用于构建用户界面的渐进式框架。它与其它大型框架不同的是，Vue
+                                        被设计为可以自底向上逐层应用</a></p>
                                 <div class="ui grid">
                                     <div class="eleven wide column">
                                         <div class="ui mini horizontal link list">
@@ -71,19 +75,24 @@
                                                 <img src="../static/images/touxiang.jpg"
                                                      th:src="@{${blog.user.avatar}}" alt=""
                                                      class="ui avatar image">
-                                                <div class="content"><a href="#" th:text="@{${blog.user.nickname}}" class="header">Ratrme</a></div>
+                                                <div class="content"><a  th:href="@{/about}" target="_blank"
+                                                                        th:text="@{${blog.user.nickname}}"
+                                                                        class="header">Ratrme</a></div>
                                             </div>
                                             <div class="item">
-                                                <i class="calendar icon" style="margin-bottom:3px"></i>&nbsp;<span th:text="${#dates.format(blog.createTime,'yyyy-MM-dd')}">2022-11-17</span>
+                                                <i class="calendar icon" style="margin-bottom:3px"></i>&nbsp;<span
+                                                    th:text="${#dates.format(blog.createTime,'yyyy-MM-dd')}">2022-11-17</span>
                                             </div>
                                             <div class="item">
-                                                <i class="eye icon"  style="margin-bottom:1px"></i>&nbsp;&nbsp;<span th:text="${blog.views}">100</span>&nbsp;&nbsp;&nbsp;
-                                                <i  style="margin-bottom:1px" th:if="${blog.views} > 2000" class="red hotjar icon"></i>
+                                                <i class="eye icon" style="margin-bottom:1px"></i>&nbsp;&nbsp;<span
+                                                    th:text="${blog.views}">100</span>&nbsp;&nbsp;&nbsp;
+                                                <i style="margin-bottom:1px" th:if="${blog.views} > 2000"
+                                                   class="red hotjar icon"></i>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="right aligned five wide column">
-                                        <a href="#" target="_blank"
+                                        <a  th:href="@{/types/{id}(id=${blog.type.id})}" target="_blank"
                                            class="ui blue basic label m-padded-tiny m-text-thin"
                                            th:text="${blog.type.name}"
                                            style="background: hsla(0, 0%, 100%, .001)!important;">后端</a>
@@ -91,7 +100,7 @@
                                 </div>
                             </div>
                             <div class="five wide column">
-                                <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">
+                                <a  th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">
                                     <img src="../static/images/blog30.jpg" th:src="${blog.firstPicture}" alt=""
                                          class="ui rounded image m-image">
                                 </a>
@@ -101,10 +110,10 @@
                 </div>
 
                 <!--分页-->
-                <div class="ui bottom attached segment m-bg"  th:if="${blogs.total>1}">
+                <div class="ui bottom attached segment m-bg" th:if="${blogs.total>1}">
                     <div class="ui middle aligned three column grid">
                         <div class="left aligned column">
-                            <a href="#" th:href="@{/(pageNum=${blogs.hasPreviousPage}?${blogs.prePage}:1)}"
+                            <a  th:href="@{/(pageNum=${blogs.hasPreviousPage}?${blogs.prePage}:1)}"
                                th:unless="${blogs.isIsFirstPage()}" class="ui mini grey basic button">上一页</a>
                         </div>
 
@@ -121,7 +130,7 @@
                         </div>
 
                         <div class="right aligned column">
-                            <a href="#" th:href="@{/(pageNum=${blogs.hasNextPage}?${blogs.nextPage}:${blogs.pages})}"
+                            <a  th:href="@{/(pageNum=${blogs.hasNextPage}?${blogs.nextPage}:${blogs.pages})}"
                                th:unless="${blogs.isIsLastPage()}" class="ui mini grey basic button">下一页</a>
                         </div>
                     </div>
@@ -137,13 +146,14 @@
                                 <i class="idea icon"></i>分类
                             </div>
                             <div class="right aligned column">
-                                <a href="#" class="m-color">more <i class="angle right icon"></i></a>
+                                <a  th:href="@{/types/-1}" target="_blank" class="m-color">more <i
+                                        class="angle right icon"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="ui segment m-bg">
                         <div class="ui fluid vertical menu m-bg">
-                            <a href="#" class="item" th:each="type : ${types}">
+                            <a class="item" th:each="type : ${types}" th:href="@{/types/{id}(id=${type.id})}" target="_blank">
                                 <span th:text="${type.name}">前端</span>
                                 <div class="ui grey basic label" style="background: hsla(0, 0%, 100%, .001)!important;">
                                     <span th:text="${#arrays.length(type.blogs)}">1</span>
@@ -160,14 +170,17 @@
                                 <i class="tags icon"></i>标签
                             </div>
                             <div class="right aligned column">
-                                <a href="#" class="m-color">more <i class="angle right icon"></i></a>
+                                <a href="#" th:href="@{/tags/-1}" target="_blank" class="m-color">more <i
+                                        class="angle right icon"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="ui segment m-bg">
-                        <a href="#" target="_blank" style="background: hsla(0,0%,100%,.001) !important;" class="ui grey basic label m-margin-tb-tiny" th:each="tag : ${tags}">
-                           <span class="m-color" th:text="${tag.name}"></span>
-                            <div class="detail"><span class="m-color" th:text="${#arrays.length(tag.blogs)}"></span></div>
+                        <a target="_blank" style="background: hsla(0,0%,100%,.001) !important;"
+                           class="ui grey basic label m-margin-tb-tiny" th:each="tag : ${tags}" th:href="@{/tags/{id}(id=${tag.id})}">
+                            <span class="m-color" th:text="${tag.name}"></span>
+                            <div class="detail"><span class="m-color" th:text="${#arrays.length(tag.blogs)}"></span>
+                            </div>
                         </a>
                     </div>
 
@@ -179,7 +192,8 @@
                     </div>
 
                     <div class="ui segment m-bg" th:each="hotBlog : ${hotBlogs}">
-                        <a href="#" th:href="@{/blog/{id}(id=${hotBlog.id})}" target="_blank" class="m-color m-text-thin" th:text="${hotBlog.title}">Vue入门</a>
+                        <a  th:href="@{/blog/{id}(id=${hotBlog.id})}" target="_blank"
+                           class="m-color m-text-thin" th:text="${hotBlog.title}">Vue入门</a>
                     </div>
                 </div>
                 <!--最新推荐-->
@@ -189,7 +203,8 @@
                     </div>
 
                     <div class="ui segment m-bg" th:each="newRecommendBlog : ${newRecommendBlogs}">
-                        <a href="#" th:href="@{/blog/{id}(id=${newRecommendBlog.id})}" target="_blank" class="m-color m-text-thin" th:text="${newRecommendBlog.title}">Vue入门</a>
+                        <a th:href="@{/blog/{id}(id=${newRecommendBlog.id})}" target="_blank"
+                           class="m-color m-text-thin" th:text="${newRecommendBlog.title}">Vue入门</a>
                     </div>
                 </div>
                 <!--二维码-->
@@ -253,6 +268,5 @@
         $('.m-item').toggleClass('m-mobile-hide')
     })
 </script>
-
 </body>
 </html>

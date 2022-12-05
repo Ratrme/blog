@@ -34,19 +34,19 @@ public class TagController {
         List<Tag> allTag = tagService.getAllTags();
         PageInfo<Tag> pageInfo = new PageInfo<>(allTag);
         model.addAttribute("pageInfo",pageInfo);
-        return "/admin/tags";
+        return "admin/tags";
     }
 
     @GetMapping("/tags/input")
     public String input(Model model){
         model.addAttribute("tag",new Tag());
-        return "/admin/tags-input";
+        return "admin/tags-input";
     }
 
     @GetMapping("/tags/{id}")
     public String update(@PathVariable Long id, Model model){
         model.addAttribute("tag", tagService.getTag(id));
-        return "/admin/tags-input";
+        return "admin/tags-input";
     }
 
 
@@ -57,7 +57,7 @@ public class TagController {
             result.rejectValue("name", "nameError","已有该标签，请勿重复添加！");
         }
         if (result.hasErrors()) {
-            return "/admin/tags-input";
+            return "admin/tags-input";
         }
         int i = tagService.saveTag(tag);
         if (i == 1) {
@@ -65,7 +65,7 @@ public class TagController {
         } else {
             attributes.addFlashAttribute("error","标签添加失败！");
         }
-        return "redirect:/admin/tags";
+        return "redirect:admin/tags";
     }
 
     @PostMapping("/tags/update/{id}")
@@ -75,7 +75,7 @@ public class TagController {
             result.rejectValue("name", "nameError","已有该标签，请勿重复添加！");
         }
         if (result.hasErrors()) {
-            return "/admin/tags-input";
+            return "admin/tags-input";
         }
         int i = tagService.updateTag(tag);
         if (i == 1) {
@@ -83,14 +83,14 @@ public class TagController {
         } else {
             attributes.addFlashAttribute("error","标签修改失败！");
         }
-        return "redirect:/admin/tags";
+        return "redirect:admin/tags";
     }
 
     @GetMapping("/tags/delete/{id}")
     public String delete(@PathVariable Long id, RedirectAttributes attributes){
         tagService.deleteTag(id);
         attributes.addFlashAttribute("message","标签删除成功！");
-        return "redirect:/admin/tags";
+        return "redirect:admin/tags";
     }
 
 }

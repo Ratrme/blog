@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>归档</title>
     <link rel="stylesheet" href="../static/lib/semantic-ui/semantic.min.css">
-    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/icon.min.css'>
+    <link rel='stylesheet prefetch'
+          href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/icon.min.css'>
     <link rel="stylesheet" href="../static/css/me.css">
 </head>
 <body>
@@ -21,8 +22,6 @@
             <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
             <a href="#" class="m-item item m-mobile-hide"><i class="clone icon"></i>归档</a>
             <a href="#" class="m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
-            <a href="#" class="m-item item m-mobile-hide"><i class="mail icon"></i>留言板</a>
-            <a href="#" class="m-item item m-mobile-hide"><i class="linkify icon"></i>友链</a>
             <div class="m-item right item m-mobile-hide">
                 <div class="ui icon transparent input">
                     <input type="text" placeholder="Search">
@@ -47,46 +46,26 @@
                     <h3 class="ui header">归档</h3>
                 </div>
                 <div class="right aligned column">
-                    共<h2 class="ui orange header m-inline-block m-text-thin"> 14 </h2>&nbsp;篇博客
+                    共<h2 class="ui orange header m-inline-block m-text-thin" th:text="${count}"> 14 </h2>&nbsp;篇博客
                 </div>
             </div>
         </div>
 
-        <h2 class="ui center aligned header">2022</h2>
-        <div class="ui fluid vertical menu m-bg">
-            <a href="#" target="_blank" class="item">
+        <th:block th:each="item : ${blogMap}">
+            <h2 class="ui center aligned header" th:text="${item.key}">2022</h2>
+            <div class="ui fluid vertical menu m-bg">
+                <a th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item" th:each="blog : ${item.value}">
                 <span>
                     <i class="small blue circle icon"></i>
-                    vue入门
-                    <div class="ui mini blue basic left pointing label m-text">11月18日</div>
+                    <span th:text="${blog.title}">vue入门</span>
+                    <div class="ui mini blue basic left pointing label m-text" th:text="${#dates.format(blog.createTime,'MM月dd日')}">
+                        11月18日
+                    </div>
                 </span>
-                <div class="ui blue basic label m-text">原创</div>
-            </a>
-            <a href="#" target="_blank" class="item">
-                <span>
-                    <i class="small blue circle icon"></i>
-                    vue入门
-                    <div class="ui mini blue basic left pointing label m-text">11月18日</div>
-                </span>
-                <div class="ui blue basic label m-text">原创</div>
-            </a>
-            <a href="#" target="_blank" class="item">
-                <span>
-                    <i class="small blue circle icon"></i>
-                    vue入门
-                    <div class="ui mini blue basic left pointing label m-text">11月18日</div>
-                </span>
-                <div class="ui blue basic label m-text">原创</div>
-            </a>
-            <a href="#" target="_blank" class="item">
-                <span>
-                    <i class="small blue circle icon"></i>
-                    vue入门
-                    <div class="ui mini blue basic left pointing label m-text">11月18日</div>
-                </span>
-                <div class="ui blue basic label m-text">原创</div>
-            </a>
-        </div>
+                    <div class="ui blue basic label m-text" th:text="${blog.flag}">原创</div>
+                </a>
+            </div>
+        </th:block>
     </div>
 </div>
 <br>

@@ -5,6 +5,7 @@ import com.lxy.vo.BlogQuery;
 import org.apache.ibatis.javassist.NotFoundException;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BlogService {
 
@@ -31,6 +32,8 @@ public interface BlogService {
     //8、查询：通过Search对象（title、typeName, recommend）, 查询博客信息
     List<Blog> getBlogsBySearchInfo(BlogQuery searchInfo);
 
+    Map<String,List<Blog>> archivesBlog();
+
     //9、添加: 通过Blog对象, 并返回博客（自增ID）
     int saveBlog(Blog blog);
 
@@ -40,8 +43,5 @@ public interface BlogService {
     //11、删除博客：通过blogId
     int deleteBlog(Long id);
 
-
-    //15、查询：博客总数目
-    Long getBlogNums();
 
 }

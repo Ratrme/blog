@@ -17,6 +17,7 @@
         from t_type
     </select>
 
+
     <update id="updateType">
         update t_type
         SET name=#{name}
@@ -35,10 +36,10 @@
         where name = #{name}
     </select>
 
-    <resultMap id="types" type="Type">
+    <resultMap id="types" type="com.lxy.pojo.Type">
         <id property="id" column="tid"/>
         <result property="name" column="name"/>
-        <collection property="blogs" ofType="Blog">
+        <collection property="blogs" ofType="com.lxy.pojo.Blog">
             <id property="id" column="bid"/>
             <result property="typeId" column="type_id"/>
         </collection>

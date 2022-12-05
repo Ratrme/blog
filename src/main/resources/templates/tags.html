@@ -21,8 +21,6 @@
             <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
             <a href="#" class="m-item item m-mobile-hide"><i class="clone icon"></i>归档</a>
             <a href="#" class="m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
-            <a href="#" class="m-item item m-mobile-hide"><i class="mail icon"></i>留言板</a>
-            <a href="#" class="m-item item m-mobile-hide"><i class="linkify icon"></i>友链</a>
             <div class="m-item right item m-mobile-hide">
                 <div class="ui icon transparent input">
                     <input type="text" placeholder="Search">
@@ -47,146 +45,62 @@
                     <h3 class="ui header">标签</h3>
                 </div>
                 <div class="right aligned column">
-                    共<h2 class="ui orange header m-inline-block m-text-thin"> 14 </h2>&nbsp;个
+                    共<h2 class="ui orange header m-inline-block m-text-thin" th:text="${#arrays.length(tags)}"> 14 </h2>&nbsp;个
                 </div>
             </div>
         </div>
         <!--标签-->
         <div class="ui attached segment m-bg m-padded-tb-large">
-            <a href="#" target="_blank" class="ui grey basic large label m-margin-tb-tiny">
-                Spring
-                <div class="detail">10</div>
-            </a>
-            <a href="#" target="_blank" class="ui grey basic large label m-margin-tb-tiny">
-                SpringBoot
-                <div class="detail">1</div>
-            </a>
-            <a href="#" target="_blank" class="ui grey basic large label m-margin-tb-tiny">
-                Mybatis
-                <div class="detail">15</div>
-            </a>
-            <a href="#" target="_blank" class="ui grey basic large label m-margin-tb-tiny">
-                Mybatis-plus
-                <div class="detail">5</div>
-            </a>
+            <div class="ui labeled button m-margin-tb-tiny" th:each="tag : ${tags}">
+                <a href="#" th:href="@{/tags/{id}(id=${tag.id})}" class="ui basic button" th:classappend="${tag.id==activeTagId}  ? 'blue'" th:text="${tag.name}">SpringBoot</a>
+                <div class="ui basic label m-bg" th:classappend="${tag.id==activeTagId}  ? 'blue'" th:text="${#arrays.length(tag.blogs)}">
+                    10
+                </div>
+            </div>
         </div>
         <!--内容-->
         <div class="ui padded blue top attached segment m-bg">
-            <div class="ui padded vertical segment m-padded-tb-large m-mobile-lr-clear">
-                <div class="ui mobile reversed stackable grid">
+            <div class="ui padded vertical segment m-padded-tb m-mobile-lr-clear" th:each="blog : ${blogs.list}">
+                <div class="ui middle aligned mobile reversed stackable grid">
                     <div class="eleven wide column">
-                        <h3 class="ui header">Vue入门</h3>
-                        <p class="m-text">Vue 是一套用于构建用户界面的渐进式框架。它与其它大型框架不同的是，Vue
-                            被设计为可以自底向上逐层应用。Vue
-                            的核心库只关注视图层，不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与现代化的工具链以及各种支持类库结合使用时，Vue
-                            也完全能够为复杂的单页应用提供驱动。</p>
+                        <h3 class="ui header"><a class="m-color" href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" th:text="${blog.title}">Vue入门</a></h3>
+                        <p class="m-text">
+                            <a th:utext="|${blog.description}...|" style="color:#000000DD" th:href="@{/blog/{id}(id=${blog.id})}">
+                                Vue 是一套用于构建用户界面的渐进式框架。它与其它大型框架不同的是，Vue
+                                被设计为可以自底向上逐层应用
+                            </a>
+                        </p>
                         <div class="ui attached grid">
                             <div class="row">
                                 <div class="eleven wide column">
                                     <div class="ui mini horizontal link list">
                                         <div class="item">
-                                            <img src="../static/images/touxiang.jpg" alt="" class="ui avatar image">
-                                            <div class="content"><a href="#" class="header">Ratrme</a></div>
+                                            <img src="../static/images/touxiang.jpg" th:src="@{${blog.user.avatar}}" alt="" class="ui avatar image">
+                                            <div class="content"><a href="#" th:href="@{/about}" target="_blank" class="header" th:text="${blog.user.nickname}">Ratrme</a></div>
                                         </div>
                                         <div class="item">
-                                            <i class="calendar icon"></i>2022-11-17
+                                            <i class="calendar icon" style="margin-bottom:3px"></i>&nbsp;
+                                            <span th:text="${#dates.format(blog.createTime,'yyyy-MM-dd')}">2022-11-17</span>
                                         </div>
                                         <div class="item">
-                                            <i class="eye icon"></i>100
+                                            <i class="eye icon" style="margin-bottom:1px"></i>&nbsp;&nbsp;
+                                            <span th:text="${blog.views}">100</span>
+                                            &nbsp;&nbsp;&nbsp;<i th:if="${blog.views} > 2000" style="margin-bottom:1px" class="red hotjar icon"></i>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="right aligned five wide column">
-                                    <a href="#" target="_blank"
-                                       class="ui grey basic label m-padded-tiny m-text-thin"
-                                       style="background: hsla(0, 0%, 100%, .001)!important;">SpringBoot</a>
+                                    <a href="#" th:href="@{/types/{id}(id=${blog.type.id})}" target="_blank"
+                                       class="ui blue basic label m-padded-tiny m-text-thin"
+                                       style="background: hsla(0, 0%, 100%, .001)!important;"
+                                        th:text="${blog.type.name}">SpringBoot</a>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="column">
-                                    <a href="#" class="ui mini basic label m-text">Vue</a>
-                                </div>
-
                             </div>
                         </div>
                     </div>
                     <div class="right floated five wide column">
-                        <a href="#" target="_blank">
-                            <img src="../static/images/blog30.jpg" alt="" class="ui rounded image">
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="ui padded vertical segment m-padded-tb-large m-mobile-lr-clear">
-                <div class="ui mobile reversed stackable grid">
-                    <div class="eleven wide column">
-                        <h3 class="ui header">Vue入门</h3>
-                        <p class="m-text">Vue 是一套用于构建用户界面的渐进式框架。它与其它大型框架不同的是，Vue
-                            被设计为可以自底向上逐层应用。Vue
-                            的核心库只关注视图层，不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与现代化的工具链以及各种支持类库结合使用时，Vue
-                            也完全能够为复杂的单页应用提供驱动。</p>
-                        <div class="ui attached grid">
-                            <div class="eleven wide column">
-                                <div class="ui mini horizontal link list">
-                                    <div class="item">
-                                        <img src="../static/images/touxiang.jpg" alt="" class="ui avatar image">
-                                        <div class="content"><a href="#" class="header">Ratrme</a></div>
-                                    </div>
-                                    <div class="item">
-                                        <i class="calendar icon"></i>2022-11-17
-                                    </div>
-                                    <div class="item">
-                                        <i class="eye icon"></i>100
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="right aligned five wide column">
-                                <a href="#" target="_blank"
-                                   class="ui grey basic label m-padded-tiny m-text-thin"
-                                   style="background: hsla(0, 0%, 100%, .001)!important;">SpringBoot</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="right floated five wide column">
-                        <a href="#" target="_blank">
-                            <img src="../static/images/blog30.jpg" alt="" class="ui rounded image">
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="ui padded vertical segment m-padded-tb-large m-mobile-lr-clear">
-                <div class="ui mobile reversed stackable grid">
-                    <div class="eleven wide column">
-                        <h3 class="ui header">Vue入门</h3>
-                        <p class="m-text">Vue 是一套用于构建用户界面的渐进式框架。它与其它大型框架不同的是，Vue
-                            被设计为可以自底向上逐层应用。Vue
-                            的核心库只关注视图层，不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与现代化的工具链以及各种支持类库结合使用时，Vue
-                            也完全能够为复杂的单页应用提供驱动。</p>
-                        <div class="ui attached grid">
-                            <div class="eleven wide column">
-                                <div class="ui mini horizontal link list">
-                                    <div class="item">
-                                        <img src="../static/images/touxiang.jpg" alt="" class="ui avatar image">
-                                        <div class="content"><a href="#" class="header">Ratrme</a></div>
-                                    </div>
-                                    <div class="item">
-                                        <i class="calendar icon"></i>2022-11-17
-                                    </div>
-                                    <div class="item">
-                                        <i class="eye icon"></i>100
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="right aligned five wide column">
-                                <a href="#" target="_blank"
-                                   class="ui grey basic label m-padded-tiny m-text-thin"
-                                   style="background: hsla(0, 0%, 100%, .001)!important;">SpringBoot</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="right floated five wide column">
-                        <a href="#" target="_blank">
-                            <img src="../static/images/blog30.jpg" alt="" class="ui rounded image">
+                        <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">
+                            <img src="../static/images/blog30.jpg" th:src="@{${blog.firstPicture}}" alt="" class="ui rounded image">
                         </a>
                     </div>
                 </div>
@@ -194,12 +108,23 @@
         </div>
         <!--分页-->
         <div class="ui bottom attached segment m-bg">
-            <div class="ui middle aligned two column grid">
+            <div class="ui middle aligned three column grid">
                 <div class="left aligned column">
-                    <a href="#" class="ui mini grey basic button">上一页</a>
                 </div>
+
+                <div class="center aligned column">
+                    第
+                    <h8><span th:text="${blogs.pageNum}"></span></h8>
+                    页/共
+                    <h8><span th:text="${blogs.pages}"></span></h8>
+                    页
+                    &nbsp;
+                    共
+                    <h8><span th:text="${blogs.total}"></span></h8>
+                    条
+                </div>
+
                 <div class="right aligned column">
-                    <a href="#" class="ui mini grey basic button">下一页</a>
                 </div>
             </div>
         </div>

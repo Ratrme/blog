@@ -57,8 +57,12 @@
                 <div class="ui middle aligned mobile reversed stackable grid">
                     <div class="eleven wide column">
                         <h3 class="ui header"><a class="m-color" href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" th:text="${blog.title}">Vue入门</a></h3>
-                        <p class="m-text" th:text="|${blog.description}......|">Vue 是一套用于构建用户界面的渐进式框架。它与其它大型框架不同的是，Vue
-                            被设计为可以自底向上逐层应用</p>
+                        <p class="m-text">
+                            <a th:utext="|${blog.description}...|" style="color:#000000DD" th:href="@{/blog/{id}(id=${blog.id})}">
+                            Vue 是一套用于构建用户界面的渐进式框架。它与其它大型框架不同的是，Vue
+                            被设计为可以自底向上逐层应用
+                            </a>
+                        </p>
                         <div class="ui grid">
                             <div class="eleven wide column">
                                 <div class="ui mini horizontal link list">
@@ -93,17 +97,6 @@
                 </div>
             </div>
         </div>
-        <!--分页-->
-        <!--<div class="ui bottom attached segment m-bg">-->
-        <!--    <div class="ui middle aligned two column grid">-->
-        <!--        <div class="left aligned column">-->
-        <!--            <a href="#" class="ui mini grey basic button">上一页</a>-->
-        <!--        </div>-->
-        <!--        <div class="right aligned column">-->
-        <!--            <a href="#" class="ui mini grey basic button">下一页</a>-->
-        <!--        </div>-->
-        <!--    </div>-->
-        <!--</div>-->
         <div class="ui bottom attached segment m-bg"  th:if="${blogs.total>1}">
             <div class="ui middle aligned three column grid">
                 <div class="left aligned column">
